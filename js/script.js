@@ -63,8 +63,7 @@ function sendToWA() {
                     `🔢 Jumlah: ${qty}\n` +
                     `💳 Pembayaran: ${payment}\n` +
                     `💰 *Total: ${total}*\n\n` +
-                    `Mohon segera berikan payment nya.` +
-                    `Saya akan segera mengirimkan bukti transfer.';
+                    `Saya akan segera mengirimkan bukti transfer.`;
 
     const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');

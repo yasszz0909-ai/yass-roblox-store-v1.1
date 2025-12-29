@@ -1,0 +1,165 @@
+/* 1. VARIABEL WARNA & TEMA */
+:root {
+    --primary: #007bff;        /* Biru Roblox */
+    --primary-dark: #0056b3;
+    --bg-body: #ffffff;        /* Putih Bersih */
+    --bg-card: #f8f9fa;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --accent-red: #ff4757;     /* Untuk Stok Terbatas */
+    --nav-bg: #ffffff;
+    --transition: 0.3s ease;
+}
+
+/* Class khusus untuk Dark Mode */
+.dark-mode {
+    --bg-body: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #ffffff;
+    --text-muted: #b0b0b0;
+    --nav-bg: #1e1e1e;
+}
+
+/* 2. RESET & BASE STYLE */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.6;
+    transition: background-color var(--transition), color var(--transition);
+    padding-bottom: 80px; /* Jarak agar tidak tertutup nav bawah */
+}
+
+/* 3. ANIMASI UTAMA */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+/* 4. LAYOUT KATALOG (HOME) */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* 5. KARTU PRODUK & GAMBAR */
+.product-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.product-card:active {
+    transform: scale(0.93); /* Animasi Membal saat klik */
+}
+
+.product-card img {
+    width: 100%;
+    max-width: 100px;
+    height: 100px;
+    object-fit: contain; /* Gambar tidak pecah / ketarik */
+    margin-bottom: 10px;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+}
+
+.limited-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--accent-red);
+    color: white;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 20px;
+    animation: pulse 2s infinite; /* Animasi berkedip pelan */
+}
+
+/* 6. NAVIGASI BAWAH */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    background: var(--nav-bg);
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    z-index: 999;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+}
+
+.nav-item.active {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.nav-item i {
+    font-size: 20px;
+}
+
+/* 7. MODAL KONFIRMASI (POP-UP) */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px); /* Efek Blur belakang */
+    display: none;
+    justify-content: center;
+    align-items: flex-end; /* Muncul dari bawah */
+    z-index: 10000;
+}
+
+.modal-content {
+    background: var(--bg-body);
+    width: 100%;
+    max-width: 500px;
+    padding: 25px;
+    border-radius: 24px 24px 0 0;
+    animation: slideUp 0.3s ease-out;
+}

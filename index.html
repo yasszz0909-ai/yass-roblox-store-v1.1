@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Yass Roblox Store | Home</title>
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header style="margin-bottom: 25px;">
+            <h1 style="color: var(--primary); font-size: 24px;">Yass Store</h1>
+            <p style="color: var(--text-muted); font-size: 14px;">Kebutuhan Roblox & Fish It! Terpercaya</p>
+        </header>
+
+        <div class="product-grid" id="main-catalog">
+            </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOrder">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 id="modalTitle" style="font-size: 18px;">Konfirmasi Pesanan</h2>
+                <button onclick="closeOrderModal()" style="background:none; border:none; font-size: 20px; color: var(--accent-red); cursor: pointer;">✕</button>
+            </div>
+
+            <div id="modalProductInfo" style="display: flex; gap: 15px; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                <img id="modalImg" src="" alt="" style="width: 60px; height: 60px; object-fit: contain;">
+                <div>
+                    <div id="modalItemName" style="font-weight: bold; font-size: 16px;"></div>
+                    <div id="modalItemNote" style="font-size: 12px; color: var(--text-muted);"></div>
+                </div>
+            </div>
+
+            <label style="font-size: 13px; font-weight: 600;">Username Roblox</label>
+            <input type="text" id="usernameInput" placeholder="Masukkan Username..." style="width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
+
+            <label style="font-size: 13px; font-weight: 600;">Jumlah</label>
+            <input type="number" id="qtyInput" value="1" min="1" oninput="calculateTotal()" style="width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
+
+            <label style="font-size: 13px; font-weight: 600;">Metode Pembayaran</label>
+            <select id="paymentMethod" onchange="calculateTotal()" style="width: 100%; padding: 12px; margin: 8px 0 20px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
+                <option value="DANA">DANA (Tanpa Biaya Admin)</option>
+                <option value="QRIS">QRIS (+ Rp 1.000 Admin)</option>
+            </select>
+
+            <div style="background: var(--bg-card); padding: 15px; border-radius: 12px; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; font-weight: bold;">
+                    <span>Total Bayar:</span>
+                    <span id="totalPriceText" style="color: var(--primary);">Rp 0</span>
+                </div>
+            </div>
+
+            <p style="color: var(--accent-red); font-size: 11px; font-weight: bold; margin-bottom: 15px; text-align: center;">
+                ⚠️ WAJIB KIRIM BUKTI TRANSFER DI WHATSAPP SETELAH TRANSFER!
+            </p>
+
+            <button onclick="sendToWA()" style="width: 100%; background: #25d366; color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 15px; cursor: pointer;">
+                Lanjut ke WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="/" class="nav-item active">
+            <span>🏠</span>
+            <span>Home</span>
+        </a>
+        <a href="/setting" class="nav-item">
+            <span>⚙️</span>
+            <span>Setting</span>
+        </a>
+    </nav>
+
+    <script src="/js/products.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

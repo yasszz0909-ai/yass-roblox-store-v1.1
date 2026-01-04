@@ -11,14 +11,16 @@ const products = [
     { id: 9, name: "Joki Ghostfinn Rod", price: 19000, img: "time.png", note: "Joki Sampai Dapat Ghostfinn Rod, Minimal Ares Rod", limited: false },
     { id: 10, name: "Joki Ghostfinn Rod", price: 22000, img: "time.png", note: "Joki Sampai Dapat Ghostfinn Rod, Minimal Astral Rod", limited: false },
     { id: 11, name: "Joki Element Rod", price: 62000, img: "time.png", note: "Joki Sampai Dapat Element Rod, Minimal Ghostfinn Rod", limited: false },
-    { id: 12, name: "Joki AFK 1 Jam", price: 700, img: "time.png", note: "Joki Map Fish It!", limited: false },
-    { id: 13, name: "Joki AFK 24 Jam", price: 11000, img: "time.png", note: "Paket Hemat 24 Jam", limited: false },
-    { id: 14, name: "El Shark Gran Maja", price: 13000, img: "el-shark.png", note: "Trade In-Game", limited: true },
-    { id: 15, name: "Robot Kraken", price: 8000, img: "kraken.png", note: "Trade In-Game", limited: true },
-    { id: 16, name: "Enchant Stone x10", price: 1000, img: "stone.png", note: "Trade In-Game", limited: true },
-    { id: 17, name: "Evolved Enchant Stone", price: 1100, img: "e-stone.png", note: "Trade In-Game", limited: true },
-    { id: 18, name: "Secret Tumbal", price: 4000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true }
+    { id: 12, name: "Joki Diamond Rod", price: 350000, img: "time.png", note: "Joki Sampai Dapat Diamond Rod, Minimal Element Rod", limited: false },
+    { id: 13, name: "Joki AFK 1 Jam", price: 700, img: "time.png", note: "Joki Map Fish It!", limited: false },
+    { id: 14, name: "Joki AFK 24 Jam", price: 11000, img: "time.png", note: "Paket Hemat 24 Jam", limited: false },
+    { id: 15, name: "El Shark Gran Maja", price: 13000, img: "el-shark.png", note: "Trade In-Game", limited: true },
+    { id: 16, name: "Robot Kraken", price: 8000, img: "kraken.png", note: "Trade In-Game", limited: true },
+    { id: 17, name: "Enchant Stone x10", price: 1000, img: "stone.png", note: "Trade In-Game", limited: true },
+    { id: 18, name: "Evolved Enchant Stone", price: 1100, img: "e-stone.png", note: "Trade In-Game", limited: true },
+    { id: 19, name: "Secret Tumbal", price: 4000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true }
 ];
+
 
 
 

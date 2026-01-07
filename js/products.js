@@ -17,9 +17,10 @@ const products = [
     { id: 15, name: "El Shark Gran Maja", price: 10000, img: "el-shark.png", note: "Trade In-Game", limited: true },
     { id: 16, name: "Robot Kraken", price: 6000, img: "kraken.png", note: "Trade In-Game", limited: true },
     { id: 17, name: "Enchant Stone x10", price: 1000, img: "stone.png", note: "Trade In-Game", limited: true },
-    { id: 18, name: "Evolved Enchant Stone", price: 1000, img: "e-stone.png", note: "Trade In-Game", limited: true },
+    { id: 18, name: "Evolved Enchant Stone", price: 1000, img: "s.png", note: "Trade In-Game", limited: true },
     { id: 19, name: "Secret Tumbal", price: 2000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true }
 ];
+
 
 
 

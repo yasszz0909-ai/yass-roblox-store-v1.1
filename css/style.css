@@ -164,19 +164,45 @@ body {
     animation: slideUp 0.3s ease-out;
 }
 
-/* Container untuk membungkus tombol-tombol kategori */
+/* Toast Notification */
+.toast-container {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 11000;
+    display: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.show-toast {
+    display: block !important;
+    animation: fadeInOut 2.5s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; bottom: 70px; }
+    20% { opacity: 1; bottom: 100px; }
+    80% { opacity: 1; bottom: 100px; }
+    100% { opacity: 0; bottom: 70px; }
+}
+
+/* Kategori */
 .category-container {
     display: flex;
     gap: 10px;
-    overflow-x: auto; /* Biar bisa digeser ke samping di HP */
+    overflow-x: auto;
     padding: 10px 0;
-    scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+    scrollbar-width: none;
 }
-
-/* Sembunyikan scrollbar di Chrome, Safari, dan Opera */
-.category-container::-webkit-scrollbar {
-    display: none;
-}
+.category-container::-webkit-scrollbar { display: none; }
 
 .tab-btn {
     background: var(--bg-card);
@@ -186,37 +212,10 @@ body {
     border-radius: 20px;
     font-size: 13px;
     font-weight: 600;
-    white-space: nowrap; /* Biar teks tombol tidak turun ke bawah */
+    white-space: nowrap;
     cursor: pointer;
-    transition: 0.3s;
 }
-
 .tab-btn.active {
     background: var(--primary);
     color: white;
-    border-color: var(--primary);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sedikit bayangan agar menonjol */
-}
-
-/* Styling untuk Toast Notification */
-.toast-container {
-    position: fixed;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-size: 14px;
-    z-index: 9999;
-    display: none; /* Sembunyi secara default */
-    animation: fadeInOut 2.5s ease-in-out;
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; bottom: 80px; }
-    20% { opacity: 1; bottom: 100px; }
-    80% { opacity: 1; bottom: 100px; }
-    100% { opacity: 0; bottom: 80px; }
 }

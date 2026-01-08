@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Yass  Store | Home</title>
+    <title>Yass Store | Home</title>
     
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#000000">
@@ -14,6 +14,31 @@
     <link rel="icon" type="image/png" href="/assets/logo.png?v=1">
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Floating WhatsApp Button Style */
+        .floating-wa {
+            position: fixed;
+            bottom: 85px; /* Di atas navigasi bawah */
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            background-color: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.2s;
+        }
+        .floating-wa:active {
+            transform: scale(0.9);
+        }
+        .floating-wa img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
 </head>
 <body>
 
@@ -46,7 +71,7 @@
                 </div>
             </div>
 
-            <label style="font-size: 13px; font-weight: 600;">Username Roblox</label>
+            <label id="inputLabelText" style="font-size: 13px; font-weight: 600;">Username Roblox</label>
             <input type="text" id="usernameInput" placeholder="Masukkan Username..." style="width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
 
             <label style="font-size: 13px; font-weight: 600;">Jumlah</label>
@@ -55,7 +80,7 @@
             <label style="font-size: 13px; font-weight: 600;">Metode Pembayaran</label>
             <select id="paymentMethod" onchange="calculateTotal()" style="width: 100%; padding: 12px; margin: 8px 0 20px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
                 <option value="DANA">DANA (Tanpa Biaya Admin)</option>
-                <option value="QRIS">QRIS (+ Rp100-2.000 Fee Admin)</option>
+                <option value="QRIS">QRIS (+ Admin Fee)</option>
             </select>
 
             <div style="background: var(--bg-card); padding: 15px; border-radius: 12px; margin-bottom: 20px;">
@@ -74,6 +99,10 @@
             </button>
         </div>
     </div>
+
+    <a href="https://whatsapp.com/channel/0029Vb74kr9EKyZMD7X5k10C" class="floating-wa" target="_blank" rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Testimoni">
+    </a>
 
     <nav class="bottom-nav">
         <a href="/" class="nav-item active">
@@ -100,5 +129,3 @@
     <script src="/js/script.js"></script>
 </body>
 </html>
-
-

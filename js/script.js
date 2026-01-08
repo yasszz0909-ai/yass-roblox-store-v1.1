@@ -1,31 +1,71 @@
-const WA_NUMBER = "6283898578903"; // <--- GANTI DENGAN NOMOR WA KAMU
+const WA_NUMBER = "6283898578903";
 let selectedProduct = null;
+let currentCategory = "Semua";
 
-// 1. Fungsi Menampilkan Produk ke Halaman Home
+// 1. Menampilkan Produk dengan Filter Kategori & Stok
 function renderCatalog() {
     const catalogContainer = document.getElementById('main-catalog');
-    if (!catalogContainer) return; // Jika tidak di halaman home, lewati
+    if (!catalogContainer) return;
 
-    catalogContainer.innerHTML = products.map(p => `
-        <div class="product-card" onclick="openOrderModal(${p.id})">
-            ${p.limited ? '<span class="limited-badge">STOK TERBATAS</span>' : ''}
-            <img src="/assets/${p.img}" alt="${p.name}">
-            <div style="font-size: 14px; font-weight: 600; margin-bottom: 5px;">${p.name}</div>
-            <div style="color: var(--primary); font-weight: bold; font-size: 13px;">Rp ${p.price.toLocaleString('id-ID')}</div>
-        </div>
-    `).join('');
+    const filtered = currentCategory === "Semua" 
+        ? products 
+        : products.filter(p => p.category === currentCategory);
+
+    catalogContainer.innerHTML = filtered.map(p => {
+        const isOutOfStock = p.stock <= 0;
+        const stockStatus = isOutOfStock 
+            ? `<span style="color: #ff4d4d; font-size: 11px; font-weight: bold;">Habis</span>` 
+            : `<span style="color: #25d366; font-size: 11px;">Stok: ${p.stock}</span>`;
+
+        return `
+            <div class="product-card" 
+                 onclick="${isOutOfStock ? "alert('Maaf, stok sedang habis!')" : `openOrderModal(${p.id})`}" 
+                 style="${isOutOfStock ? 'opacity: 0.6; filter: grayscale(1);' : ''}">
+                ${p.limited ? '<span class="limited-badge">STOK TERBATAS</span>' : ''}
+                <img src="/assets/${p.img}" alt="${p.name}">
+                <div style="font-size: 14px; font-weight: 600; margin-bottom: 2px;">${p.name}</div>
+                <div style="margin-bottom: 5px;">${stockStatus}</div>
+                <div style="color: var(--primary); font-weight: bold; font-size: 13px;">Rp ${p.price.toLocaleString('id-ID')}</div>
+            </div>
+        `;
+    }).join('');
 }
 
-// 2. Fungsi Membuka Pop-up Pesanan
+// 2. Fungsi Filter Kategori (Dipanggil saat Tab diklik)
+function filterCategory(category, element) {
+    currentCategory = category;
+    
+    // Update tampilan tombol aktif
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    if (element) element.classList.add('active');
+    
+    renderCatalog();
+}
+
+// 3. Membuka Modal & Menyesuaikan Input (Robux vs Redfinger vs Joki)
 function openOrderModal(id) {
     selectedProduct = products.find(p => p.id === id);
     
     document.getElementById('modalImg').src = `/assets/${selectedProduct.img}`;
     document.getElementById('modalItemName').innerText = selectedProduct.name;
     document.getElementById('modalItemNote').innerText = selectedProduct.note;
-    document.getElementById('modalOrder').style.display = 'flex';
     
-    // Reset input
+    const label = document.getElementById('inputLabelText');
+    const input = document.getElementById('usernameInput');
+
+    // Penyesuaian Label berdasarkan Kategori
+    if (selectedProduct.category === "Joki") {
+        label.innerText = "Data Login (User & Pass)";
+        input.placeholder = "Contoh: User: Yass | Pass: 123";
+    } else if (selectedProduct.category === "Redfinger" || selectedProduct.category === "Akun") {
+        label.innerText = "Nomor WA / Email Aktif";
+        input.placeholder = "Untuk pengiriman data...";
+    } else {
+        label.innerText = "Username Roblox";
+        input.placeholder = "Masukkan Username...";
+    }
+
+    document.getElementById('modalOrder').style.display = 'flex';
     document.getElementById('qtyInput').value = 1;
     calculateTotal();
 }
@@ -34,8 +74,9 @@ function closeOrderModal() {
     document.getElementById('modalOrder').style.display = 'none';
 }
 
-// 3. Fungsi Hitung Harga Otomatis
+// 4. Hitung Harga Otomatis (Admin QRIS 500 sesuai kode aslimu)
 function calculateTotal() {
+    if (!selectedProduct) return;
     const qty = document.getElementById('qtyInput').value;
     const payment = document.getElementById('paymentMethod').value;
     
@@ -45,7 +86,7 @@ function calculateTotal() {
     document.getElementById('totalPriceText').innerText = `Rp ${total.toLocaleString('id-ID')}`;
 }
 
-// 4. Fungsi Kirim Data ke WhatsApp
+// 5. Kirim ke WhatsApp dengan Format yang Sesuai
 function sendToWA() {
     const user = document.getElementById('usernameInput').value;
     const qty = document.getElementById('qtyInput').value;
@@ -53,27 +94,29 @@ function sendToWA() {
     const total = document.getElementById('totalPriceText').innerText;
 
     if (!user) {
-        alert("Mohon masukkan Username Roblox Anda!");
+        alert("Mohon isi data pengiriman/login!");
         return;
     }
 
+    // Penyesuaian Teks Label untuk WA
+    let userType = "Username";
+    if (selectedProduct.category === "Joki") userType = "Data Login";
+    else if (selectedProduct.category === "Redfinger" || selectedProduct.category === "Akun") userType = "Kontak";
+
     const message = `Halo Yass Store, saya ingin memesan:\n\n` +
                     `📦 Produk: *${selectedProduct.name}*\n` +
-                    `👤 Username: *${user}*\n` +
+                    `👤 ${userType}: *${user}*\n` +
                     `🔢 Jumlah: ${qty}\n` +
                     `💳 Pembayaran: ${payment}\n` +
                     `💰 *Total: ${total}*\n\n` +
-                    `Saya akan segera mengirimkan bukti transfer.`;
+                    `Mohon segera diproses, terima kasih!`;
 
     const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
 }
 
-// Jalankan fungsi tampilkan produk saat web dibuka
 document.addEventListener('DOMContentLoaded', () => {
     renderCatalog();
-    
-    // Logika Dark Mode (Jika ada di localStorage)
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
     }

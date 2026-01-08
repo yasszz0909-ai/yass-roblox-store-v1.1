@@ -19,7 +19,7 @@ function renderCatalog() {
 
         return `
             <div class="product-card" 
-                 onclick="${isOutOfStock ? "alert('Maaf, stok sedang habis!')" : `openOrderModal(${p.id})`}" 
+                 onclick="${isOutOfStock ? "showToast('Maaf, stok sedang habis!')" : `openOrderModal(${p.id})`}" 
                  style="${isOutOfStock ? 'opacity: 0.6; filter: grayscale(1);' : ''}">
                 ${p.limited ? '<span class="limited-badge">STOK TERBATAS</span>' : ''}
                 <img src="/assets/${p.img}" alt="${p.name}">
@@ -94,7 +94,7 @@ function sendToWA() {
     const total = document.getElementById('totalPriceText').innerText;
 
     if (!user) {
-        alert("Mohon isi data pengiriman/login!");
+        showToast("Mohon isi data pengiriman/login!");
         return;
     }
 
@@ -120,4 +120,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
     }
+
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.innerText = message;
+    toast.style.display = 'block';
+    
+    // Sembunyikan lagi setelah 2.5 detik (sesuai durasi animasi CSS)
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 2500);
+}
+
 });

@@ -2,19 +2,18 @@ const WA_NUMBER = "6283898578903";
 let selectedProduct = null;
 let currentCategory = "Semua";
 
-// --- FUNGSI BARU: TOAST NOTIFICATION (GANTI ALERT) ---
+// FUNGSI TOAST NOTIFICATION
 function showToast(message) {
     const toast = document.getElementById('toast');
     toast.innerText = message;
-    toast.style.display = 'block';
+    toast.classList.add('show-toast');
     
-    // Hilang otomatis setelah 2.5 detik
     setTimeout(() => {
-        toast.style.display = 'none';
+        toast.classList.remove('show-toast');
     }, 2500);
 }
 
-// 1. Menampilkan Produk dengan Filter Kategori & Stok
+// RENDER KATALOG
 function renderCatalog() {
     const catalogContainer = document.getElementById('main-catalog');
     if (!catalogContainer) return;
@@ -43,7 +42,6 @@ function renderCatalog() {
     }).join('');
 }
 
-// 2. Fungsi Filter Kategori
 function filterCategory(category, element) {
     currentCategory = category;
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -51,10 +49,8 @@ function filterCategory(category, element) {
     renderCatalog();
 }
 
-// 3. Membuka Modal & Menyesuaikan Input
 function openOrderModal(id) {
     selectedProduct = products.find(p => p.id === id);
-    
     document.getElementById('modalImg').src = `/assets/${selectedProduct.img}`;
     document.getElementById('modalItemName').innerText = selectedProduct.name;
     document.getElementById('modalItemNote').innerText = selectedProduct.note;
@@ -82,19 +78,15 @@ function closeOrderModal() {
     document.getElementById('modalOrder').style.display = 'none';
 }
 
-// 4. Hitung Harga Otomatis
 function calculateTotal() {
     if (!selectedProduct) return;
     const qty = document.getElementById('qtyInput').value;
     const payment = document.getElementById('paymentMethod').value;
-    
     const adminFee = (payment === "QRIS") ? 500 : 0;
     const total = (selectedProduct.price * qty) + adminFee;
-    
     document.getElementById('totalPriceText').innerText = `Rp ${total.toLocaleString('id-ID')}`;
 }
 
-// 5. Kirim ke WhatsApp
 function sendToWA() {
     const user = document.getElementById('usernameInput').value;
     const qty = document.getElementById('qtyInput').value;
@@ -102,7 +94,7 @@ function sendToWA() {
     const total = document.getElementById('totalPriceText').innerText;
 
     if (!user) {
-        showToast("Mohon isi data pengiriman/login!"); // GANTI DARI ALERT
+        showToast("Mohon isi data pengiriman/login!");
         return;
     }
 
@@ -118,13 +110,9 @@ function sendToWA() {
                     `💰 *Total: ${total}*\n\n` +
                     `Mohon segera diproses, terima kasih!`;
 
-    const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
-    window.open(waUrl, '_blank');
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     renderCatalog();
-    if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-mode');
-    }
 });

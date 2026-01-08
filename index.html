@@ -38,6 +38,19 @@
             width: 30px;
             height: 30px;
         }
+
+        /* Container untuk Tab Kategori agar bisa di-scroll ke samping */
+        .category-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 5px 0 15px;
+            margin-bottom: 10px;
+            scrollbar-width: none; /* Firefox */
+        }
+        .category-container::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
     </style>
 </head>
 <body>
@@ -51,6 +64,15 @@
             </div>
             <img src="/assets/logo.png" alt="Logo Yass Store" style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
         </header>
+
+        <div class="category-container">
+            <button class="tab-btn active" onclick="filterCategory('Semua', this)">Semua</button>
+            <button class="tab-btn" onclick="filterCategory('Robux', this)">Robux</button>
+            <button class="tab-btn" onclick="filterCategory('Redfinger', this)">Redfinger</button>
+            <button class="tab-btn" onclick="filterCategory('Akun', this)">Akun</button>
+            <button class="tab-btn" onclick="filterCategory('Joki', this)">Joki</button>
+            <button class="tab-btn" onclick="filterCategory('Item', this)">Item</button>
+        </div>
 
         <div class="product-grid" id="main-catalog">
             </div>
@@ -114,16 +136,6 @@
             <span>Setting</span>
         </a>
     </nav>
-
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js')
-            .then(reg => console.log('PWA aktif!'))
-            .catch(err => console.log('PWA gagal', err));
-        });
-      }
-    </script>
 
     <script src="/js/products.js"></script>
     <script src="/js/script.js"></script>

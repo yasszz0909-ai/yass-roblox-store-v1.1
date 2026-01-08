@@ -2,6 +2,18 @@ const WA_NUMBER = "6283898578903";
 let selectedProduct = null;
 let currentCategory = "Semua";
 
+// --- FUNGSI BARU: TOAST NOTIFICATION (GANTI ALERT) ---
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.innerText = message;
+    toast.style.display = 'block';
+    
+    // Hilang otomatis setelah 2.5 detik
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 2500);
+}
+
 // 1. Menampilkan Produk dengan Filter Kategori & Stok
 function renderCatalog() {
     const catalogContainer = document.getElementById('main-catalog');
@@ -31,18 +43,15 @@ function renderCatalog() {
     }).join('');
 }
 
-// 2. Fungsi Filter Kategori (Dipanggil saat Tab diklik)
+// 2. Fungsi Filter Kategori
 function filterCategory(category, element) {
     currentCategory = category;
-    
-    // Update tampilan tombol aktif
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     if (element) element.classList.add('active');
-    
     renderCatalog();
 }
 
-// 3. Membuka Modal & Menyesuaikan Input (Robux vs Redfinger vs Joki)
+// 3. Membuka Modal & Menyesuaikan Input
 function openOrderModal(id) {
     selectedProduct = products.find(p => p.id === id);
     
@@ -53,7 +62,6 @@ function openOrderModal(id) {
     const label = document.getElementById('inputLabelText');
     const input = document.getElementById('usernameInput');
 
-    // Penyesuaian Label berdasarkan Kategori
     if (selectedProduct.category === "Joki") {
         label.innerText = "Data Login (User & Pass)";
         input.placeholder = "Contoh: User: Yass | Pass: 123";
@@ -74,7 +82,7 @@ function closeOrderModal() {
     document.getElementById('modalOrder').style.display = 'none';
 }
 
-// 4. Hitung Harga Otomatis (Admin QRIS 500 sesuai kode aslimu)
+// 4. Hitung Harga Otomatis
 function calculateTotal() {
     if (!selectedProduct) return;
     const qty = document.getElementById('qtyInput').value;
@@ -86,7 +94,7 @@ function calculateTotal() {
     document.getElementById('totalPriceText').innerText = `Rp ${total.toLocaleString('id-ID')}`;
 }
 
-// 5. Kirim ke WhatsApp dengan Format yang Sesuai
+// 5. Kirim ke WhatsApp
 function sendToWA() {
     const user = document.getElementById('usernameInput').value;
     const qty = document.getElementById('qtyInput').value;
@@ -94,11 +102,10 @@ function sendToWA() {
     const total = document.getElementById('totalPriceText').innerText;
 
     if (!user) {
-        showToast("Mohon isi data pengiriman/login!");
+        showToast("Mohon isi data pengiriman/login!"); // GANTI DARI ALERT
         return;
     }
 
-    // Penyesuaian Teks Label untuk WA
     let userType = "Username";
     if (selectedProduct.category === "Joki") userType = "Data Login";
     else if (selectedProduct.category === "Redfinger" || selectedProduct.category === "Akun") userType = "Kontak";
@@ -120,16 +127,4 @@ document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
     }
-
-function showToast(message) {
-    const toast = document.getElementById('toast');
-    toast.innerText = message;
-    toast.style.display = 'block';
-    
-    // Sembunyikan lagi setelah 2.5 detik (sesuai durasi animasi CSS)
-    setTimeout(() => {
-        toast.style.display = 'none';
-    }, 2500);
-}
-
 });

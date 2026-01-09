@@ -2,6 +2,21 @@ const WA_NUMBER = "6283898578903";
 let selectedProduct = null;
 let currentCategory = "Semua";
 
+// --- FUNGSI TAMBAHAN UNTUK DARK MODE V1.1 ---
+function applyTheme() {
+    const savedTheme = localStorage.getItem('yass_theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+}
+
+// Fungsi ini yang dipanggil tombol di /setting/index.html
+function toggleDarkMode() {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('yass_theme', isDark ? 'dark' : 'light');
+}
+// --------------------------------------------
+
 // FUNGSI TOAST NOTIFICATION
 function showToast(message) {
     const toast = document.getElementById('toast');
@@ -114,5 +129,6 @@ function sendToWA() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    applyTheme(); // PENTING: Cek tema saat halaman terbuka
     renderCatalog();
 });

@@ -16,7 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
     <script>
-        // Theme Check awal agar tidak flickering
         (function() {
             const savedTheme = localStorage.getItem('yass_theme');
             if (savedTheme === 'dark') {
@@ -27,16 +26,18 @@
 </head>
 <body>
 
-    <div class="container">
-        <header class="main-header">
-            <div>
-                <h1 class="brand-name">|Yass Store|</h1>
+    <header class="hero-section">
+        <div class="hero-content">
+            <div class="brand-text">
+                <h1 class="brand-name">Yass Roblox Store</h1>
                 <p class="brand-tagline">Tersedia Kebutuhan Roblox, Fish It!, dll</p>
-                <p class="brand-tagline">Aman & Terpercaya</p>
+                <p class="brand-tagline" style="color: var(--primary); font-weight: 700;">Aman & Terpercaya</p>
             </div>
-            <img src="/assets/logo.png" alt="Logo Yass Store" class="header-logo">
-        </header>
+            <img src="/assets/logo.png" alt="Logo Yass Store" class="hero-logo">
+        </div>
+    </header>
 
+    <main class="container">
         <div class="category-container">
             <button class="tab-btn active" onclick="filterCategory('Semua', this)">Semua</button>
             <button class="tab-btn" onclick="filterCategory('Robux', this)">Robux</button>
@@ -48,18 +49,19 @@
 
         <div class="product-grid" id="main-catalog">
             </div>
-    </div>
+    </main>
 
     <div class="modal-overlay" id="modalOrder">
         <div class="modal-content">
+            <button onclick="closeOrderModal()" class="close-btn">✕</button>
+
             <div class="modal-header">
                 <h2 id="modalTitle">Konfirmasi Pesanan</h2>
-                <button onclick="closeOrderModal()" class="close-btn">✕</button>
             </div>
 
             <div id="modalProductInfo" class="product-info-brief">
-                <img id="modalImg" src="" alt="">
-                <div>
+                <img id="modalImg" src="" alt="Produk">
+                <div class="product-details">
                     <div id="modalItemName" class="item-name"></div>
                     <div id="modalItemNote" class="item-note"></div>
                 </div>
@@ -87,7 +89,7 @@
             <div class="total-section">
                 <div class="total-row">
                     <span>Total Bayar:</span>
-                    <span id="totalPriceText">Rp 0</span>
+                    <span id="totalPriceText" style="color: var(--primary); font-weight: 800;">Rp 0</span>
                 </div>
             </div>
 

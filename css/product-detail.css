@@ -87,3 +87,41 @@ body.product-page {
     cursor: pointer;
     box-shadow: 0 10px 20px rgba(0, 122, 255, 0.4);
 }
+/* Update Bagian Atas css/product-detail.css */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #111111;
+    --card-bg: #f5f5f5;
+    --border-color: #eeeeee;
+}
+
+/* Jika Body memiliki class dark-mode */
+body.dark-mode {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --card-bg: #111111;
+    --border-color: #222222;
+}
+
+body.product-page {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+
+.detail-header {
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-description {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+/* Tombol Kembali & Bagikan agar kontras di kedua mode */
+.back-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}

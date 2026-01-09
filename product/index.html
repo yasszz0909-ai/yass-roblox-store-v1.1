@@ -6,7 +6,6 @@
     <title>Detail Produk | Yass Store</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/product-detail.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="product-page">
 
@@ -16,21 +15,21 @@
     </header>
 
     <div class="detail-img-container">
-        <img id="det-img" src="" alt="Memuat Gambar...">
+        <img id="det-img" src="" alt="Memuat...">
     </div>
 
     <main class="detail-info">
-        <span id="det-category" class="category-badge">KATEGORI</span>
-        <h1 id="det-title">Nama Produk</h1>
+        <span id="det-category" class="category-badge"></span>
+        <h1 id="det-title">Memuat...</h1>
         
         <div class="price-row">
-            <span id="det-price" class="price-tag">Rp 0</span>
-            <span id="det-stock" class="stock-tag">Stok: 0</span>
+            <span id="det-price" class="price-tag"></span>
+            <span id="det-stock" class="stock-tag"></span>
         </div>
 
         <div class="detail-description">
             <h3>Deskripsi Produk</h3>
-            <p id="det-note">Memuat informasi produk...</p>
+            <p id="det-note">Sedang mengambil data produk...</p>
         </div>
     </main>
 
@@ -40,38 +39,30 @@
 
     <script src="/js/products.js"></script>
     <script>
-        // 1. Fungsi Sinkronisasi Tema
         function applyTheme() {
             const savedTheme = localStorage.getItem('yass_theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-            } else {
-                document.body.classList.remove('dark-mode');
-            }
+            if (savedTheme === 'dark') { document.body.classList.add('dark-mode'); }
         }
 
-        // 2. Fungsi Membuat Slug (Identik dengan script.js)
         function createSlug(name) {
-            return name.toLowerCase()
-                .replace(/[^a-z0-9 -]/g, '') 
-                .replace(/\s+/g, '-')       
-                .replace(/-+/g, '-');       
+            return name.toLowerCase().replace(/[^a-z0-9 -]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Jalankan tema sebelum render konten
-            applyTheme(); 
+            applyTheme();
 
-            // Tangkap Slug dari URL
+            // Cek apakah data products berhasil dimuat
+            if (typeof products === 'undefined') {
+                document.getElementById('det-title').innerText = "Error: Data Gagal Dimuat";
+                document.getElementById('det-note').innerText = "File products.js tidak ditemukan atau jalur salah. Pastikan src='/js/products.js'";
+                return;
+            }
+
             const pathParts = window.location.pathname.split('/');
             const currentSlug = pathParts[pathParts.length - 1];
-
-            // Cari produk yang cocok
             const p = products.find(item => createSlug(item.name) === currentSlug);
 
             if (p) {
-                // Isi Data Produk
-                document.title = `${p.name} | Yass Store`;
                 document.getElementById('det-title').innerText = p.name;
                 document.getElementById('det-category').innerText = p.category;
                 document.getElementById('det-img').src = `/assets/${p.img}`;
@@ -79,35 +70,12 @@
                 document.getElementById('det-stock').innerText = `Stok: ${p.stock}`;
                 document.getElementById('det-note').innerText = p.note;
 
-                // Proteksi Stok Habis
-                if (p.stock <= 0) {
-                    const btn = document.getElementById('btn-order-now');
-                    btn.innerText = "Stok Habis";
-                    btn.style.opacity = "0.5";
-                    btn.disabled = true;
-                }
-
-                // Aksi Tombol Order (Balik ke Home + Trigger Modal)
                 document.getElementById('btn-order-now').onclick = () => {
                     window.location.href = `/?checkout_id=${p.id}`;
                 };
-
-                // Aksi Tombol Bagikan
-                document.getElementById('btn-share').onclick = async () => {
-                    try {
-                        if (navigator.share) {
-                            await navigator.share({
-                                title: p.name + " - Yass Store",
-                                url: window.location.href
-                            });
-                        } else {
-                            navigator.clipboard.writeText(window.location.href);
-                            alert("Link produk disalin ke clipboard!");
-                        }
-                    } catch (err) { console.log(err); }
-                };
             } else {
-                // Jika slug tidak valid, lempar ke beranda
+                // Jika slug salah atau produk dihapus
+                alert("Produk tidak ditemukan, kembali ke Beranda.");
                 window.location.href = '/';
             }
         });

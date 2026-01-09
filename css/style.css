@@ -207,25 +207,58 @@ h1 {
 }
 
 /* 7. MODAL & TOAST */
+/* --- FIX MODAL TIDAK TRANSPARAN & TEKS JELAS --- */
+
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.8); /* Gelap di luar modal */
+    backdrop-filter: blur(8px); /* Efek blur pada latar belakang */
     display: none;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center; 
+    padding: 20px;
     z-index: 10000;
 }
 
 .modal-content {
-    background: var(--bg-card);
-    color: var(--text-main);
+    background-color: var(--bg-card) !important; /* Memaksa warna solid dari variabel tema */
+    opacity: 1 !important; /* Memastikan tidak ada transparansi pada kotak modal */
+    position: relative;
     width: 100%;
     max-width: 500px;
     padding: 25px;
-    border-radius: 24px 24px 0 0;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Memberi bayangan agar modal "keluar" */
     animation: slideUp 0.3s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Garis tepi tipis agar terlihat batasnya */
+}
+
+/* Memastikan Teks Label Terbaca (Tidak Ikut Transparan) */
+.modal-content label {
+    color: var(--text-main) !important;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+    opacity: 1 !important;
+}
+
+/* Input Field agar kontras dengan background modal */
+.modal-content input, 
+.modal-content select {
+    background: var(--bg-body) !important; /* Gunakan warna body yang berbeda dengan kartu */
+    color: var(--text-main) !important;
+    border: 1px solid rgba(128, 128, 128, 0.3) !important;
+    opacity: 1 !important;
+}
+
+/* Bagian Total Bayar agar menonjol */
+.total-section {
+    background: var(--primary-glow) !important;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 20px 0;
+    border-left: 4px solid var(--primary); /* Memberi aksen garis di samping */
 }
 
 .toast-container {

@@ -154,6 +154,25 @@ function calculateTotal(showNotif = true) {
     document.getElementById('totalPriceText').innerText = `Rp ${total.toLocaleString('id-ID')}`;
 }
 
+// --- UPDATE LOGIKA TANGGAL & ORDER (js/script.js) ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    applyTheme(); 
+    renderCatalog();
+
+    // Menampilkan tanggal otomatis di header
+    const taglineArea = document.querySelector('.brand-text');
+    if (taglineArea) {
+        const dateElement = document.createElement('p');
+        const sekarang = new Date();
+        const opsi = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        
+        dateElement.style.cssText = "color: #888; font-size: 11px; margin-top: 5px; font-weight: 500;";
+        dateElement.innerText = "📅 " + sekarang.toLocaleDateString('id-ID', opsi);
+        taglineArea.appendChild(dateElement);
+    }
+});
+
 function sendToWA() {
     const user = document.getElementById('usernameInput').value;
     const qty = document.getElementById('qtyInput').value;
@@ -165,20 +184,31 @@ function sendToWA() {
         return;
     }
 
+    // Mendapatkan stempel waktu saat tombol diklik
+    const skrg = new Date();
+    const tgl = skrg.toLocaleDateString('id-ID');
+    const jam = skrg.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+
     let userType = "Username";
     if (selectedProduct.category === "Joki") userType = "Data Login";
     else if (selectedProduct.category === "Redfinger" || selectedProduct.category === "Akun") userType = "Kontak";
 
-    const message = `Halo Yass Store, saya ingin memesan:\n\n` +
-                    `📦 Produk: *${selectedProduct.name}*\n` +
-                    `👤 ${userType}: *${user}*\n` +
-                    `🔢 Jumlah: ${qty}\n` +
-                    `💳 Pembayaran: ${payment}\n` +
-                    `💰 *Total: ${total}*\n\n` +
+    // Format pesan WhatsApp yang rapi
+    const message = `*PESANAN BARU - YASS STORE*%0A` +
+                    `------------------------------%0A` +
+                    `📦 Produk: *${selectedProduct.name}*%0A` +
+                    `👤 ${userType}: *${user}*%0A` +
+                    `🔢 Jumlah: ${qty}%0A` +
+                    `💳 Pembayaran: ${payment}%0A` +
+                    `💰 *Total: ${total}*%0A` +
+                    `------------------------------%0A` +
+                    `📅 Tanggal: ${tgl}%0A` +
+                    `⏰ Jam: ${jam} WIB%0A%0A` +
                     `Mohon segera diproses, terima kasih!`;
 
-    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     applyTheme(); 

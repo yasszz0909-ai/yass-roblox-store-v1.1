@@ -222,43 +222,60 @@ h1 {
 
 /* Kategori */
 /* --- PERBAIKAN KHUSUS KATEGORI MODE TERANG --- */
-
+/* --- PERBAIKAN KHUSUS KATEGORI MODE TERANG --- */
 .category-container {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     overflow-x: auto;
     padding: 15px 5px; /* Memberi ruang agar bayangan tidak terpotong */
     scrollbar-width: none;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    -ms-overflow-style: none;
+}
+
+.category-container::-webkit-scrollbar {
+    display: none; /* Sembunyikan scrollbar di Chrome/Safari */
 }
 
 .tab-btn {
-    background: #ffffff; /* Putih bersih */
-    color: var(--text-main);
-    border: none; /* Hapus border agar terlihat lebih clean */
-    padding: 10px 22px;
-    border-radius: 16px; /* Bentuk kotak membulat modern */
-    font-size: 14px;
+    background: #ffffff; /* Tombol warna putih */
+    color: #64748b; /* Warna teks abu-abu saat tidak aktif */
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Border sangat tipis agar ada batas */
+    padding: 10px 20px;
+    border-radius: 14px;
+    font-size: 13px;
     font-weight: 600;
     white-space: nowrap;
-    transition: var(--transition);
-    /* Memberikan bayangan agar terlihat terpisah dari background body */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+    transition: all 0.3s ease;
     cursor: pointer;
+    /* Efek bayangan agar tombol terlihat melayang di atas body */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
-/* Efek saat tombol kategori aktif (Terang) */
+/* KHUSUS SAAT AKTIF (MODE TERANG) */
 .tab-btn.active {
-    background: var(--primary);
-    color: #ffffff;
-    box-shadow: 0 8px 20px var(--primary-glow);
-    transform: translateY(-2px); /* Efek melayang saat aktif */
+    background: #0084ff !important; /* Biru terang agar kontras */
+    color: #ffffff !important; /* Teks jadi putih bersih */
+    border-color: #0084ff;
+    box-shadow: 0 10px 15px -3px rgba(0, 132, 255, 0.3); /* Cahaya biru di bawah tombol */
+    transform: translateY(-2px); /* Tombol sedikit naik saat terpilih */
 }
 
-/* Efek saat tombol kategori diklik/tekan */
-.tab-btn:active {
-    transform: scale(0.95);
+/* --- PENYESUAIAN MODE GELAP (AGAR TETAP KEREN) --- */
+.dark-mode .tab-btn {
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+
+.dark-mode .tab-btn.active {
+    background: #00f2ff !important; /* Cyan neon */
+    color: #020617 !important; /* Teks gelap agar terbaca di warna terang */
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+    border-color: #00f2ff;
+}
+
 
 /* --- ADAPTASI MODE GELAP (Agar tidak rusak) --- */
 .dark-mode .tab-btn {

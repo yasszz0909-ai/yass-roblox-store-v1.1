@@ -10,16 +10,16 @@ function applyTheme() {
     }
 }
 
-// Fungsi ini yang dipanggil tombol di /setting/index.html
 function toggleDarkMode() {
     const isDark = document.body.classList.toggle('dark-mode');
     localStorage.setItem('yass_theme', isDark ? 'dark' : 'light');
 }
-// --------------------------------------------
 
-// FUNGSI TOAST NOTIFICATION
+// FUNGSI TOAST NOTIFICATION (Auto-hide setelah 2.5 detik)
 function showToast(message) {
     const toast = document.getElementById('toast');
+    if (!toast) return;
+    
     toast.innerText = message;
     toast.classList.add('show-toast');
     
@@ -86,17 +86,30 @@ function openOrderModal(id) {
 
     document.getElementById('modalOrder').style.display = 'flex';
     document.getElementById('qtyInput').value = 1;
-    calculateTotal();
+    
+    // Reset payment ke DANA setiap buka modal agar user melihat perubahan saat ganti ke QRIS
+    document.getElementById('paymentMethod').value = "DANA";
+    calculateTotal(false); // false agar tidak memunculkan toast saat pertama buka
 }
 
 function closeOrderModal() {
     document.getElementById('modalOrder').style.display = 'none';
 }
 
-function calculateTotal() {
+function calculateTotal(showNotif = true) {
     if (!selectedProduct) return;
     const qty = document.getElementById('qtyInput').value;
     const payment = document.getElementById('paymentMethod').value;
+    
+    // Memberikan notifikasi toast saat user mengubah pilihan
+    if (showNotif) {
+        if (payment === "QRIS") {
+            showToast("QRIS Terpilih (+ Biaya Admin Rp 500)");
+        } else {
+            showToast("DANA Terpilih (Tanpa Biaya Admin)");
+        }
+    }
+
     const adminFee = (payment === "QRIS") ? 500 : 0;
     const total = (selectedProduct.price * qty) + adminFee;
     document.getElementById('totalPriceText').innerText = `Rp ${total.toLocaleString('id-ID')}`;
@@ -129,6 +142,6 @@ function sendToWA() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    applyTheme(); // PENTING: Cek tema saat halaman terbuka
+    applyTheme(); 
     renderCatalog();
 });

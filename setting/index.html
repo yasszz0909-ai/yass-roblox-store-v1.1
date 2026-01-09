@@ -115,23 +115,24 @@
     </nav>
 
     <script>
-        // Logika Dark Mode Khusus di Halaman Setting
         const toggle = document.getElementById('darkModeToggle');
-        
+        // Gunakan kunci 'yass_theme' agar sama dengan halaman index.html
+        const currentTheme = localStorage.getItem('yass_theme');
         // Cek status tema saat halaman dimuat
-        if (localStorage.getItem('theme') === 'dark') {
+        if (currentTheme === 'dark') {
             document.body.classList.add('dark-mode');
             toggle.checked = true;
         }
-
         function toggleTheme() {
             if (toggle.checked) {
                 document.body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
+                localStorage.setItem('yass_theme', 'dark'); // Simpan sebagai dark
             } else {
                 document.body.classList.remove('dark-mode');
-                localStorage.setItem('theme', 'light');
+                localStorage.setItem('yass_theme', 'light'); // Simpan sebagai light
             }
+            // Opsional: Berikan log di konsol untuk memastikan
+            console.log("Tema diubah ke: " + localStorage.getItem('yass_theme'));
         }
     </script>
 </body>

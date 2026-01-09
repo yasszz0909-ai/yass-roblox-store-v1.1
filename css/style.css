@@ -510,35 +510,39 @@ h1 {
     transform: scale(0.96);
 }
 
-/* Tombol Tutup yang adaptif dan tetap di dalam kotak modal */
+/* Pastikan ini ada agar tombol X mengunci di dalam kotak */
+.modal-content {
+    position: relative; /* Jangkar untuk tombol X */
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 24px 24px 0 0;
+}
+
+/* Tombol X yang Adaptif (Terlihat di Terang & Gelap) */
 .close-btn {
     position: absolute;
     top: 15px;
     right: 15px;
     width: 32px;
     height: 32px;
-    /* Gunakan warna transparan yang kontras di kedua mode */
-    background: rgba(128, 128, 128, 0.1); 
-    border: 1px solid rgba(128, 128, 128, 0.2);
-    /* Mengikuti variabel --text-main agar otomatis hitam di terang, putih di gelap */
+    /* Memberi background abu-abu tipis agar terlihat di background putih */
+    background: rgba(128, 128, 128, 0.15); 
+    border: none;
+    /* Otomatis Hitam di Mode Terang, Putih di Mode Gelap */
     color: var(--text-main); 
-    border-radius: 8px;
+    border-radius: 50%; /* Membuatnya bulat elegan */
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    font-weight: bold;
     cursor: pointer;
     z-index: 100;
     transition: var(--transition);
 }
 
-/* Efek saat ditekan */
-.close-btn:active {
+.close-btn:hover {
     background: var(--accent-red);
     color: white;
-    border-color: var(--accent-red);
-    transform: scale(0.9);
 }
 
 /* Khusus Mode Gelap: Berikan sedikit cahaya agar lebih terlihat */

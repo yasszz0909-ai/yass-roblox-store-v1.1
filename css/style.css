@@ -221,30 +221,57 @@ h1 {
 }
 
 /* Kategori */
+/* --- PERBAIKAN KHUSUS KATEGORI MODE TERANG --- */
+
 .category-container {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     overflow-x: auto;
-    padding: 10px 0;
+    padding: 15px 5px; /* Memberi ruang agar bayangan tidak terpotong */
     scrollbar-width: none;
+    margin-bottom: 10px;
 }
 
 .tab-btn {
-    background: var(--bg-card);
+    background: #ffffff; /* Putih bersih */
     color: var(--text-main);
-    border: 1px solid rgba(128, 128, 128, 0.1);
-    padding: 8px 18px;
-    border-radius: 50px;
-    font-size: 13px;
+    border: none; /* Hapus border agar terlihat lebih clean */
+    padding: 10px 22px;
+    border-radius: 16px; /* Bentuk kotak membulat modern */
+    font-size: 14px;
     font-weight: 600;
+    white-space: nowrap;
     transition: var(--transition);
+    /* Memberikan bayangan agar terlihat terpisah dari background body */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+    cursor: pointer;
 }
 
+/* Efek saat tombol kategori aktif (Terang) */
 .tab-btn.active {
     background: var(--primary);
-    color: #fff;
+    color: #ffffff;
+    box-shadow: 0 8px 20px var(--primary-glow);
+    transform: translateY(-2px); /* Efek melayang saat aktif */
+}
+
+/* Efek saat tombol kategori diklik/tekan */
+.tab-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- ADAPTASI MODE GELAP (Agar tidak rusak) --- */
+.dark-mode .tab-btn {
+    background: var(--bg-card);
+    color: var(--text-main);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .tab-btn.active {
+    background: var(--primary);
     border-color: var(--primary);
-    box-shadow: 0 4px 12px var(--primary-glow);
+    box-shadow: 0 0 20px var(--primary-glow);
 }
 
 /* --- 8. CUSTOM PAYMENT SELECTOR --- */

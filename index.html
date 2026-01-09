@@ -52,6 +52,22 @@
             scrollbar-width: none; 
         }
         .category-container::-webkit-scrollbar { display: none; }
+
+        /* Style Tambahan untuk Scanner Preview */
+        #roblox-preview {
+            display: none;
+            align-items: center;
+            background: rgba(0, 251, 255, 0.08);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--primary);
+            margin-bottom: 15px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -95,7 +111,15 @@
             </div>
 
             <label id="inputLabelText" style="font-size: 13px; font-weight: 600;">Username Roblox</label>
-            <input type="text" id="usernameInput" placeholder="Masukkan Username..." style="width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
+            <input type="text" id="usernameInput" placeholder="Masukkan Username..." oninput="scanRobloxUser()" style="width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
+
+            <div id="roblox-preview">
+                <img id="roblox-avatar" src="" alt="Avatar" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--primary); margin-right: 12px; background: #222;">
+                <div>
+                    <small style="color: var(--text-muted); font-size: 10px; display: block;">Akun Terdeteksi:</small>
+                    <strong id="roblox-display-name" style="color: var(--text-main); font-size: 14px;">Memuat...</strong>
+                </div>
+            </div>
 
             <label style="font-size: 13px; font-weight: 600;">Jumlah</label>
             <input type="number" id="qtyInput" value="1" min="1" oninput="calculateTotal()" style="width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
@@ -149,6 +173,53 @@
                 document.body.classList.add('dark-mode');
             }
         });
+
+        // Logika Scanner yang akan dipanggil oleh oninput="scanRobloxUser()"
+        let debounceTimer;
+        async function scanRobloxUser() {
+            const username = document.getElementById('usernameInput').value;
+            const previewBox = document.getElementById('roblox-preview');
+            const avatarImg = document.getElementById('roblox-avatar');
+            const nameDisplay = document.getElementById('roblox-display-name');
+
+            // Cek kategori dari variabel global (pastikan ini diatur di script.js saat modal buka)
+            if (window.currentCategory !== 'Robux') {
+                previewBox.style.display = 'none';
+                return;
+            }
+
+            clearTimeout(debounceTimer);
+            if (username.length < 3) {
+                previewBox.style.display = 'none';
+                return;
+            }
+
+            debounceTimer = setTimeout(async () => {
+                try {
+                    const proxy = "https://corsproxy.io/?";
+                    const userUrl = `https://users.roblox.com/v1/users/search?keyword=${username}&limit=1`;
+                    
+                    const response = await fetch(proxy + encodeURIComponent(userUrl));
+                    const data = await response.json();
+
+                    if (data.data && data.data.length > 0) {
+                        const user = data.data[0];
+                        const thumbUrl = `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${user.id}&size=150x150&format=Png&isCircular=true`;
+                        
+                        const thumbRes = await fetch(proxy + encodeURIComponent(thumbUrl));
+                        const thumbData = await thumbRes.json();
+
+                        avatarImg.src = thumbData.data[0].imageUrl;
+                        nameDisplay.innerText = user.displayName + " (@" + user.name + ")";
+                        previewBox.style.display = 'flex';
+                    } else {
+                        previewBox.style.display = 'none';
+                    }
+                } catch (err) {
+                    console.error("Scanner Error:", err);
+                }
+            }, 600);
+        }
     </script>
 </body>
 </html>

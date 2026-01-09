@@ -15,7 +15,7 @@ function toggleDarkMode() {
     localStorage.setItem('yass_theme', isDark ? 'dark' : 'light');
 }
 
-// FUNGSI TOAST NOTIFICATION (Auto-hide setelah 2.5 detik)
+// FUNGSI TOAST NOTIFICATION
 function showToast(message) {
     const toast = document.getElementById('toast');
     if (!toast) return;
@@ -28,7 +28,45 @@ function showToast(message) {
     }, 2500);
 }
 
-// RENDER KATALOG
+// --- LOGIKA BARU: CUSTOM PAYMENT SELECTOR (Sesuai Gambar) ---
+function openPaymentSelector() {
+    const modal = document.getElementById('paymentSelectorModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        updateRadioUI();
+    }
+}
+
+function selectPayment(value, text) {
+    // Set value ke input tersembunyi
+    document.getElementById('paymentMethod').value = value;
+    // Ubah teks di tampilan pemicu (trigger)
+    document.getElementById('selectedPaymentText').innerText = text;
+    // Tutup dialog
+    document.getElementById('paymentSelectorModal').style.display = 'none';
+    
+    // Jalankan kalkulasi total dengan toast
+    calculateTotal(true);
+}
+
+function updateRadioUI() {
+    const currentVal = document.getElementById('paymentMethod').value;
+    // Hapus kelas 'active' dari semua radio
+    document.querySelectorAll('.radio-custom').forEach(rd => rd.classList.remove('radio-selected'));
+    // Tambah kelas ke yang terpilih
+    const activeRadio = document.getElementById('radio-' + currentVal);
+    if (activeRadio) activeRadio.classList.add('radio-selected');
+}
+
+// Tutup modal jika klik di luar area konten
+window.onclick = function(event) {
+    const modal = document.getElementById('paymentSelectorModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+// ------------------------------------------------------------
+
 function renderCatalog() {
     const catalogContainer = document.getElementById('main-catalog');
     if (!catalogContainer) return;
@@ -87,9 +125,11 @@ function openOrderModal(id) {
     document.getElementById('modalOrder').style.display = 'flex';
     document.getElementById('qtyInput').value = 1;
     
-    // Reset payment ke DANA setiap buka modal agar user melihat perubahan saat ganti ke QRIS
+    // Reset ke DANA setiap buka modal
     document.getElementById('paymentMethod').value = "DANA";
-    calculateTotal(false); // false agar tidak memunculkan toast saat pertama buka
+    document.getElementById('selectedPaymentText').innerText = "DANA (Tanpa Biaya Admin)";
+    
+    calculateTotal(false); 
 }
 
 function closeOrderModal() {
@@ -101,7 +141,6 @@ function calculateTotal(showNotif = true) {
     const qty = document.getElementById('qtyInput').value;
     const payment = document.getElementById('paymentMethod').value;
     
-    // Memberikan notifikasi toast saat user mengubah pilihan
     if (showNotif) {
         if (payment === "QRIS") {
             showToast("QRIS Terpilih (+ Biaya Admin Rp 500)");

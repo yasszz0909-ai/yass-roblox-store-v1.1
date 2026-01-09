@@ -363,3 +363,40 @@ h1 {
     border-color: var(--primary);
     background: var(--primary);
 }
+
+/* Perbaikan Header agar Logo di Pojok Kanan Atas rapi */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 20px;
+}
+
+.header-logo {
+    width: 50px !important; 
+    height: 50px !important;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Perbaikan Logo WA agar tidak menutupi layar */
+.floating-wa {
+    position: fixed;
+    bottom: 90px; /* Di atas navigasi bawah */
+    right: 20px;
+    z-index: 1000;
+}
+
+.floating-wa img {
+    width: 55px !important; /* Ukuran tombol standar */
+    height: auto;
+}
+
+/* Perbaikan Gambar Produk di Katalog */
+.product-card img {
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: contain;
+    margin-bottom: 10px;
+}

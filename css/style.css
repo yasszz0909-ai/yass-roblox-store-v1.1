@@ -1,23 +1,26 @@
-/* 1. VARIABEL WARNA & TEMA */
+/* 1. VARIABEL WARNA & TEMA V1.2 */
 :root {
-    --primary: #007bff;        /* Biru Roblox */
-    --primary-dark: #0056b3;
-    --bg-body: #ffffff;        /* Putih Bersih */
-    --bg-card: #f8f9fa;
-    --text-main: #333333;
-    --text-muted: #666666;
-    --accent-red: #ff4757;     /* Untuk Stok Terbatas */
-    --nav-bg: #ffffff;
-    --transition: 0.3s ease;
+    /* Mode Terang (Clean Minimalist) */
+    --primary: #0084ff;
+    --primary-glow: rgba(0, 132, 255, 0.2);
+    --bg-body: #f5f7fa;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --accent-red: #ff4757;
+    --nav-bg: rgba(255, 255, 255, 0.9);
+    --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Class khusus untuk Dark Mode */
 .dark-mode {
-    --bg-body: #121212;
-    --bg-card: #1e1e1e;
-    --text-main: #ffffff;
-    --text-muted: #b0b0b0;
-    --nav-bg: #1e1e1e;
+    /* Mode Gelap (Deep Blue Neon) */
+    --bg-body: #020617;
+    --bg-card: #0f172a;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --primary: #00f2ff; /* Cyan Neon */
+    --primary-glow: rgba(0, 242, 255, 0.4);
+    --nav-bg: rgba(15, 23, 42, 0.9);
 }
 
 /* 2. RESET & BASE STYLE */
@@ -34,19 +37,19 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     transition: background-color var(--transition), color var(--transition);
-    padding-bottom: 80px; /* Jarak agar tidak tertutup nav bawah */
+    padding-bottom: 80px;
 }
 
-/* 3. ANIMASI UTAMA */
+/* 3. ANIMASI */
+@keyframes neonBreath {
+    0% { border-color: rgba(0, 242, 255, 0.1); box-shadow: 0 0 5px rgba(0, 242, 255, 0.05); }
+    50% { border-color: rgba(0, 242, 255, 0.5); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
+    100% { border-color: rgba(0, 242, 255, 0.1); box-shadow: 0 0 5px rgba(0, 242, 255, 0.05); }
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.8; }
-    100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes slideUp {
@@ -54,12 +57,22 @@ body {
     to { transform: translateY(0); }
 }
 
-/* 4. LAYOUT KATALOG (HOME) */
+/* 4. LAYOUT KATALOG */
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     animation: fadeIn 0.5s ease-out;
+}
+
+h1 {
+    transition: var(--transition);
+    font-weight: 800;
+}
+
+.dark-mode h1 {
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary-glow);
 }
 
 .product-grid {
@@ -69,29 +82,47 @@ body {
     margin-top: 20px;
 }
 
-/* 5. KARTU PRODUK & GAMBAR */
+/* 5. KARTU PRODUK (NEON & GLASS) */
 .product-card {
     background: var(--bg-card);
     border-radius: 16px;
     padding: 15px;
     text-align: center;
     position: relative;
-    border: 1px solid rgba(0,0,0,0.05);
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
     cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+/* Efek Khusus Mode Gelap (Neon) */
+.dark-mode .product-card {
+    border: 1px solid rgba(0, 242, 255, 0.1);
+    animation: neonBreath 3s infinite ease-in-out;
 }
 
 .product-card:active {
-    transform: scale(0.93); /* Animasi Membal saat klik */
+    transform: scale(0.95) translateY(-2px);
+}
+
+/* Hover/Active Glow */
+.product-card:hover, .product-card:active {
+    border-color: var(--primary);
+    box-shadow: 0 8px 20px var(--primary-glow);
 }
 
 .product-card img {
     width: 100%;
     max-width: 100px;
     height: 100px;
-    object-fit: contain; /* Gambar tidak pecah / ketarik */
+    object-fit: contain;
     margin-bottom: 10px;
-    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+    transition: var(--transition);
+}
+
+.dark-mode .product-card img {
+    filter: drop-shadow(0 0 8px var(--primary-glow));
 }
 
 .limited-badge {
@@ -104,34 +135,35 @@ body {
     font-weight: bold;
     padding: 3px 8px;
     border-radius: 20px;
-    animation: pulse 2s infinite; /* Animasi berkedip pelan */
+    box-shadow: 0 2px 10px rgba(255, 45, 85, 0.3);
 }
 
-/* 6. NAVIGASI BAWAH */
+/* 6. NAVIGASI BAWAH (GLASSMORPHISM) */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     width: 100%;
-    max-width: 100%;
     background: var(--nav-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     display: flex;
     justify-content: space-around;
     padding: 12px 0;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 999;
 }
 
 .nav-item {
     text-decoration: none;
     color: var(--text-muted);
-    font-size: 12px;
+    font-size: 11px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 4px;
     flex: 1;
+    transition: var(--transition);
 }
 
 .nav-item.active {
@@ -139,24 +171,25 @@ body {
     font-weight: bold;
 }
 
-.nav-item i {
-    font-size: 20px;
+.dark-mode .nav-item.active {
+    text-shadow: 0 0 10px var(--primary-glow);
 }
 
-/* 7. MODAL KONFIRMASI (POP-UP) */
+/* 7. MODAL & TOAST */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px); /* Efek Blur belakang */
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
     display: none;
     justify-content: center;
-    align-items: flex-end; /* Muncul dari bawah */
+    align-items: flex-end;
     z-index: 10000;
 }
 
 .modal-content {
-    background: var(--bg-body);
+    background: var(--bg-card);
+    color: var(--text-main);
     width: 100%;
     max-width: 500px;
     padding: 25px;
@@ -164,34 +197,26 @@ body {
     animation: slideUp 0.3s ease-out;
 }
 
-/* Toast Notification */
 .toast-container {
     position: fixed;
     bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
+    background: var(--bg-card);
+    color: var(--text-main);
     padding: 12px 24px;
-    border-radius: 25px;
-    font-size: 14px;
+    border-radius: 50px;
+    font-size: 13px;
     font-weight: 600;
     z-index: 11000;
     display: none;
-    white-space: nowrap;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border: 1px solid var(--primary);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .show-toast {
     display: block !important;
     animation: fadeInOut 2.5s ease-in-out forwards;
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; bottom: 70px; }
-    20% { opacity: 1; bottom: 100px; }
-    80% { opacity: 1; bottom: 100px; }
-    100% { opacity: 0; bottom: 70px; }
 }
 
 /* Kategori */
@@ -202,20 +227,21 @@ body {
     padding: 10px 0;
     scrollbar-width: none;
 }
-.category-container::-webkit-scrollbar { display: none; }
 
 .tab-btn {
     background: var(--bg-card);
     color: var(--text-main);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 8px 16px;
-    border-radius: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+    padding: 8px 18px;
+    border-radius: 50px;
     font-size: 13px;
     font-weight: 600;
-    white-space: nowrap;
-    cursor: pointer;
+    transition: var(--transition);
 }
+
 .tab-btn.active {
     background: var(--primary);
-    color: white;
-        }
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px var(--primary-glow);
+}

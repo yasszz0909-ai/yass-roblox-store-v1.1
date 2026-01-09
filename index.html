@@ -25,7 +25,6 @@
     </script>
 
     <style>
-        /* Floating WhatsApp Button Style */
         .floating-wa {
             position: fixed;
             bottom: 85px; 
@@ -41,15 +40,9 @@
             z-index: 1000;
             transition: transform 0.2s;
         }
-        .floating-wa:active {
-            transform: scale(0.9);
-        }
-        .floating-wa img {
-            width: 30px;
-            height: 30px;
-        }
+        .floating-wa:active { transform: scale(0.9); }
+        .floating-wa img { width: 30px; height: 30px; }
 
-        /* Container untuk Tab Kategori agar bisa di-scroll ke samping */
         .category-container {
             display: flex;
             gap: 10px;
@@ -58,9 +51,7 @@
             margin-bottom: 10px;
             scrollbar-width: none; 
         }
-        .category-container::-webkit-scrollbar {
-            display: none;
-        }
+        .category-container::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
@@ -72,7 +63,7 @@
                 <p style="color: var(--text-muted); font-size: 14px;">Tersedia Kebutuhan Roblox, Fish It!, dll</p>
                 <p style="color: var(--text-muted); font-size: 14px;">Aman & Terpercaya</p>
             </div>
-            <img src="/assets/logo.png" alt="Logo Yass Store" style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <img src="/assets/logo.png" alt="Logo Yass Store" style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover;">
         </header>
 
         <div class="category-container">
@@ -159,40 +150,5 @@
             }
         });
     </script>
-</body>
-</html>
-
-</div>
-            </div>
-
-            <p style="color: var(--accent-red); font-size: 11px; font-weight: bold; margin-bottom: 15px; text-align: center;">
-                ⚠️ WAJIB KIRIM BUKTI TRANSFER DI WHATSAPP SETELAH TRANSFER!
-            </p>
-
-            <button onclick="sendToWA()" style="width: 100%; background: #25d366; color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 15px; cursor: pointer;">
-                Lanjut ke WhatsApp
-            </button>
-        </div>
-    </div>
-
-    <div id="toast" class="toast-container"></div>
-    
-    <a href="https://whatsapp.com/channel/0029Vb74kr9EKyZMD7X5k10C" class="floating-wa" target="_blank" rel="noopener">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Testimoni">
-    </a>
-
-    <nav class="bottom-nav">
-        <a href="/" class="nav-item active">
-            <span>🏠</span>
-            <span>Home</span>
-        </a>
-        <a href="/setting" class="nav-item">
-            <span>⚙️</span>
-            <span>Setting</span>
-        </a>
-    </nav>
-
-    <script src="/js/products.js"></script>
-    <script src="/js/script.js"></script>
 </body>
 </html>

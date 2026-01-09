@@ -14,11 +14,21 @@
     <link rel="icon" type="image/png" href="/assets/logo.png?v=1">
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('yass_theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+
     <style>
         /* Floating WhatsApp Button Style */
         .floating-wa {
             position: fixed;
-            bottom: 85px; /* Di atas navigasi bawah */
+            bottom: 85px; 
             right: 20px;
             width: 55px;
             height: 55px;
@@ -46,10 +56,10 @@
             overflow-x: auto;
             padding: 5px 0 15px;
             margin-bottom: 10px;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none; 
         }
         .category-container::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
+            display: none;
         }
     </style>
 </head>
@@ -59,7 +69,7 @@
         <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <div>
                 <h1 style="color: var(--primary); font-size: 24px;">|Yass Store|</h1>
-                <p style="color: var(--text-muted); font-size: 14px;">Tersedia Kebutuhan Roblox, Fish It!,dll</p>
+                <p style="color: var(--text-muted); font-size: 14px;">Tersedia Kebutuhan Roblox, Fish It!, dll</p>
                 <p style="color: var(--text-muted); font-size: 14px;">Aman & Terpercaya</p>
             </div>
             <img src="/assets/logo.png" alt="Logo Yass Store" style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
@@ -141,7 +151,48 @@
 
     <script src="/js/products.js"></script>
     <script src="/js/script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('yass_theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
 </body>
 </html>
 
+</div>
+            </div>
 
+            <p style="color: var(--accent-red); font-size: 11px; font-weight: bold; margin-bottom: 15px; text-align: center;">
+                ⚠️ WAJIB KIRIM BUKTI TRANSFER DI WHATSAPP SETELAH TRANSFER!
+            </p>
+
+            <button onclick="sendToWA()" style="width: 100%; background: #25d366; color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 15px; cursor: pointer;">
+                Lanjut ke WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast-container"></div>
+    
+    <a href="https://whatsapp.com/channel/0029Vb74kr9EKyZMD7X5k10C" class="floating-wa" target="_blank" rel="noopener">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Testimoni">
+    </a>
+
+    <nav class="bottom-nav">
+        <a href="/" class="nav-item active">
+            <span>🏠</span>
+            <span>Home</span>
+        </a>
+        <a href="/setting" class="nav-item">
+            <span>⚙️</span>
+            <span>Setting</span>
+        </a>
+    </nav>
+
+    <script src="/js/products.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

@@ -10,16 +10,15 @@ function applyTheme() {
     }
 }
 
-// Fungsi ini yang dipanggil tombol di /setting/index.html
 function toggleDarkMode() {
     const isDark = document.body.classList.toggle('dark-mode');
     localStorage.setItem('yass_theme', isDark ? 'dark' : 'light');
 }
-// --------------------------------------------
 
 // FUNGSI TOAST NOTIFICATION
 function showToast(message) {
     const toast = document.getElementById('toast');
+    if (!toast) return;
     toast.innerText = message;
     toast.classList.add('show-toast');
     
@@ -66,12 +65,21 @@ function filterCategory(category, element) {
 
 function openOrderModal(id) {
     selectedProduct = products.find(p => p.id === id);
+    
+    // Simpan kategori global agar fungsi scanner di index.html bisa mendeteksi
+    window.currentCategory = selectedProduct.category;
+
     document.getElementById('modalImg').src = `/assets/${selectedProduct.img}`;
     document.getElementById('modalItemName').innerText = selectedProduct.name;
     document.getElementById('modalItemNote').innerText = selectedProduct.note;
     
     const label = document.getElementById('inputLabelText');
     const input = document.getElementById('usernameInput');
+    const robloxPreview = document.getElementById('roblox-preview');
+
+    // Reset input dan preview scanner setiap kali modal dibuka
+    input.value = '';
+    if (robloxPreview) robloxPreview.style.display = 'none';
 
     if (selectedProduct.category === "Joki") {
         label.innerText = "Data Login (User & Pass)";
@@ -107,6 +115,7 @@ function sendToWA() {
     const qty = document.getElementById('qtyInput').value;
     const payment = document.getElementById('paymentMethod').value;
     const total = document.getElementById('totalPriceText').innerText;
+    const robloxPreview = document.getElementById('roblox-preview');
 
     if (!user) {
         showToast("Mohon isi data pengiriman/login!");
@@ -114,12 +123,23 @@ function sendToWA() {
     }
 
     let userType = "Username";
-    if (selectedProduct.category === "Joki") userType = "Data Login";
-    else if (selectedProduct.category === "Redfinger" || selectedProduct.category === "Akun") userType = "Kontak";
+    let validationStatus = "";
+
+    if (selectedProduct.category === "Joki") {
+        userType = "Data Login";
+    } else if (selectedProduct.category === "Redfinger" || selectedProduct.category === "Akun") {
+        userType = "Kontak";
+    } else if (selectedProduct.category === "Robux") {
+        // Cek apakah preview avatar muncul (berarti akun valid)
+        if (robloxPreview && robloxPreview.style.display === 'flex') {
+            const displayName = document.getElementById('roblox-display-name').innerText;
+            validationStatus = `\n✅ *Status: Akun Terverifikasi (${displayName})*`;
+        }
+    }
 
     const message = `Halo Yass Store, saya ingin memesan:\n\n` +
                     `📦 Produk: *${selectedProduct.name}*\n` +
-                    `👤 ${userType}: *${user}*\n` +
+                    `👤 ${userType}: *${user}*${validationStatus}\n` +
                     `🔢 Jumlah: ${qty}\n` +
                     `💳 Pembayaran: ${payment}\n` +
                     `💰 *Total: ${total}*\n\n` +
@@ -129,6 +149,6 @@ function sendToWA() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    applyTheme(); // PENTING: Cek tema saat halaman terbuka
+    applyTheme();
     renderCatalog();
 });

@@ -510,45 +510,39 @@ h1 {
     transform: scale(0.96);
 }
 
-/* Container Utama Modal harus Relative agar tombol X mengunci di dalamnya */
-.modal-content {
-    position: relative; /* KUNCI UTAMA */
-    background: var(--bg-card);
-    padding: 25px;
-    border-radius: 24px 24px 0 0;
-    max-width: 500px;
-    width: 100%;
-}
-
-/* Tombol X yang mengunci di dalam kotak modal */
+/* Tombol Tutup yang adaptif dan tetap di dalam kotak modal */
 .close-btn {
-    position: absolute; /* Mengunci posisi berdasarkan .modal-content */
-    top: 15px;          /* Jarak dari atas kotak modal */
-    right: 15px;        /* Jarak dari kanan kotak modal */
-    width: 30px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;       /* Warna putih agar kontras dengan header biru */
-    border-radius: 8px; /* Bentuk kotak membulat kecil */
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    /* Gunakan warna transparan yang kontras di kedua mode */
+    background: rgba(128, 128, 128, 0.1); 
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    /* Mengikuti variabel --text-main agar otomatis hitam di terang, putih di gelap */
+    color: var(--text-main); 
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
-    z-index: 10;
+    z-index: 100;
     transition: var(--transition);
 }
 
-.close-btn:hover {
+/* Efek saat ditekan */
+.close-btn:active {
     background: var(--accent-red);
+    color: white;
     border-color: var(--accent-red);
+    transform: scale(0.9);
 }
 
-
-/* Efek saat tombol ditekan atau disentuh */
-.close-btn:active {
-    background: var(--accent-red); /* Berubah merah saat diklik */
-    color: white;
-    transform: scale(0.9);
+/* Khusus Mode Gelap: Berikan sedikit cahaya agar lebih terlihat */
+.dark-mode .close-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
 }

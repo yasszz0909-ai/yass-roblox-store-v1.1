@@ -400,3 +400,32 @@ h1 {
     object-fit: contain;
     margin-bottom: 10px;
 }
+
+/* Batasi ukuran gambar di dalam modal agar tidak memenuhi layar */
+#modalImg {
+    width: 80px !important;    /* Ukuran ideal agar tetap rapi */
+    height: 80px !important;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 15px;       /* Jarak ke teks di bawahnya */
+}
+
+/* Pastikan info produk di modal tersusun rapi */
+.product-info-brief {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+/* Merapikan input agar tidak berdempetan */
+.input-group {
+    margin-bottom: 12px;
+}
+
+.input-group input, .custom-select-trigger {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}

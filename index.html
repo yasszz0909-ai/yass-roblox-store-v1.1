@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
     <script>
+        // Theme Check awal agar tidak flickering
         (function() {
             const savedTheme = localStorage.getItem('yass_theme');
             if (savedTheme === 'dark') {
@@ -23,47 +24,17 @@
             }
         })();
     </script>
-
-    <style>
-        .floating-wa {
-            position: fixed;
-            bottom: 85px; 
-            right: 20px;
-            width: 55px;
-            height: 55px;
-            background-color: #25d366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 1000;
-            transition: transform 0.2s;
-        }
-        .floating-wa:active { transform: scale(0.9); }
-        .floating-wa img { width: 30px; height: 30px; }
-
-        .category-container {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 5px 0 15px;
-            margin-bottom: 10px;
-            scrollbar-width: none; 
-        }
-        .category-container::-webkit-scrollbar { display: none; }
-    </style>
 </head>
 <body>
 
     <div class="container">
-        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <header class="main-header">
             <div>
-                <h1 style="color: var(--primary); font-size: 24px;">|Yass Store|</h1>
-                <p style="color: var(--text-muted); font-size: 14px;">Tersedia Kebutuhan Roblox, Fish It!, dll</p>
-                <p style="color: var(--text-muted); font-size: 14px;">Aman & Terpercaya</p>
+                <h1 class="brand-name">|Yass Store|</h1>
+                <p class="brand-tagline">Tersedia Kebutuhan Roblox, Fish It!, dll</p>
+                <p class="brand-tagline">Aman & Terpercaya</p>
             </div>
-            <img src="/assets/logo.png" alt="Logo Yass Store" style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover;">
+            <img src="/assets/logo.png" alt="Logo Yass Store" class="header-logo">
         </header>
 
         <div class="category-container">
@@ -81,52 +52,72 @@
 
     <div class="modal-overlay" id="modalOrder">
         <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 id="modalTitle" style="font-size: 18px;">Konfirmasi Pesanan</h2>
-                <button onclick="closeOrderModal()" style="background:none; border:none; font-size: 20px; color: var(--accent-red); cursor: pointer;">✕</button>
+            <div class="modal-header">
+                <h2 id="modalTitle">Konfirmasi Pesanan</h2>
+                <button onclick="closeOrderModal()" class="close-btn">✕</button>
             </div>
 
-            <div id="modalProductInfo" style="display: flex; gap: 15px; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(0,0,0,0.05);">
-                <img id="modalImg" src="" alt="" style="width: 60px; height: 60px; object-fit: contain;">
+            <div id="modalProductInfo" class="product-info-brief">
+                <img id="modalImg" src="" alt="">
                 <div>
-                    <div id="modalItemName" style="font-weight: bold; font-size: 16px;"></div>
-                    <div id="modalItemNote" style="font-size: 12px; color: var(--text-muted);"></div>
+                    <div id="modalItemName" class="item-name"></div>
+                    <div id="modalItemNote" class="item-note"></div>
                 </div>
             </div>
 
-            <label id="inputLabelText" style="font-size: 13px; font-weight: 600;">Username Roblox</label>
-            <input type="text" id="usernameInput" placeholder="Masukkan Username..." style="width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
+            <div class="input-group">
+                <label id="inputLabelText">Username Roblox</label>
+                <input type="text" id="usernameInput" placeholder="Masukkan Username...">
+            </div>
 
-            <label style="font-size: 13px; font-weight: 600;">Jumlah</label>
-            <input type="number" id="qtyInput" value="1" min="1" oninput="calculateTotal()" style="width: 100%; padding: 12px; margin: 8px 0 15px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
+            <div class="input-group">
+                <label>Jumlah</label>
+                <input type="number" id="qtyInput" value="1" min="1" oninput="calculateTotal()">
+            </div>
 
-            <label style="font-size: 13px; font-weight: 600;">Metode Pembayaran</label>
-            <select id="paymentMethod" onchange="calculateTotal()" style="width: 100%; padding: 12px; margin: 8px 0 20px; border-radius: 10px; border: 1px solid #ddd; background: var(--bg-card); color: var(--text-main);">
-                <option value="DANA">DANA (Tanpa Biaya Admin)</option>
-                <option value="QRIS">QRIS (+ Admin Fee)</option>
-            </select>
+            <div class="input-group">
+                <label>Metode Pembayaran</label>
+                <div class="custom-select-trigger" onclick="openPaymentSelector()">
+                    <span id="selectedPaymentText">DANA (Tanpa Biaya Admin)</span>
+                    <span class="chevron">▼</span>
+                </div>
+                <input type="hidden" id="paymentMethod" value="DANA">
+            </div>
 
-            <div style="background: var(--bg-card); padding: 15px; border-radius: 12px; margin-bottom: 20px;">
-                <div style="display: flex; justify-content: space-between; font-weight: bold;">
+            <div class="total-section">
+                <div class="total-row">
                     <span>Total Bayar:</span>
-                    <span id="totalPriceText" style="color: var(--primary);">Rp 0</span>
+                    <span id="totalPriceText">Rp 0</span>
                 </div>
             </div>
 
-            <p style="color: var(--accent-red); font-size: 11px; font-weight: bold; margin-bottom: 15px; text-align: center;">
+            <p class="warning-text">
                 ⚠️ WAJIB KIRIM BUKTI TRANSFER DI WHATSAPP SETELAH TRANSFER!
             </p>
 
-            <button onclick="sendToWA()" style="width: 100%; background: #25d366; color: white; border: none; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 15px; cursor: pointer;">
+            <button onclick="sendToWA()" class="btn-primary">
                 Lanjut ke WhatsApp
             </button>
+        </div>
+    </div>
+
+    <div id="paymentSelectorModal" class="payment-dialog-overlay" onclick="this.style.display='none'">
+        <div class="payment-dialog-content" onclick="event.stopPropagation()">
+            <div class="payment-option" onclick="selectPayment('DANA', 'DANA (Tanpa Biaya Admin)')">
+                <span>DANA (Tanpa Biaya Admin)</span>
+                <div class="radio-custom" id="radio-DANA"></div>
+            </div>
+            <div class="payment-option" onclick="selectPayment('QRIS', 'QRIS (+ Admin Fee)')">
+                <span>QRIS (+ Admin Fee)</span>
+                <div class="radio-custom" id="radio-QRIS"></div>
+            </div>
         </div>
     </div>
 
     <div id="toast" class="toast-container"></div>
     
     <a href="https://whatsapp.com/channel/0029Vb74kr9EKyZMD7X5k10C" class="floating-wa" target="_blank" rel="noopener">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Testimoni">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Channel">
     </a>
 
     <nav class="bottom-nav">
@@ -142,13 +133,5 @@
 
     <script src="/js/products.js"></script>
     <script src="/js/script.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('yass_theme') === 'dark') {
-                document.body.classList.add('dark-mode');
-            }
-        });
-    </script>
 </body>
-    </html>
+</html>

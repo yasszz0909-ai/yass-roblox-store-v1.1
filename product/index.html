@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Detail Produk | Yass Store</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/product-detail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="product-page">
+
+    <header class="detail-header">
+        <button onclick="window.location.href='/'" class="back-btn">← Kembali</button>
+        <button id="btn-share" class="back-btn" style="background: #007AFF; border: none; color: white;">🔗 Bagikan</button>
+    </header>
+
+    <div class="detail-img-container">
+        <img id="det-img" src="" alt="Memuat Gambar...">
+    </div>
+
+    <main class="detail-info">
+        <span id="det-category" class="category-badge">KATEGORI</span>
+        <h1 id="det-title">Nama Produk</h1>
+        
+        <div class="price-row">
+            <span id="det-price" class="price-tag">Rp 0</span>
+            <span id="det-stock" class="stock-tag">Stok: 0</span>
+        </div>
+
+        <div class="detail-description">
+            <h3>Deskripsi Produk</h3>
+            <p id="det-note">Memuat informasi produk...</p>
+        </div>
+    </main>
+
+    <div class="bottom-action">
+        <button id="btn-order-now" class="btn-buy-full">Buat Pesanan Sekarang</button>
+    </div>
+
+    <script src="/js/products.js"></script>
+    <script>
+        // 1. Sinkronisasi Dark Mode dari LocalStorage
+        function applyTheme() {
+            const savedTheme = localStorage.getItem('yass_theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        }
+
+        // 2. Fungsi Membuat Slug (Harus sama dengan di script.js)
+        function createSlug(name) {
+            return name.toLowerCase()
+                .replace(/[^a-z0-9 -]/g, '') 
+                .replace(/\s+/g, '-')       
+                .replace(/-+/g, '-');       
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(); // Terapkan tema gelap jika aktif
+
+            // Ambil slug dari URL (contoh: /product/1000-robux-gamepass)
+            const pathParts = window.location.pathname.split('/');
+            const currentSlug = pathParts[pathParts.length - 1];
+
+            // Cari data produk berdasarkan slug
+            const p = products.find(item => createSlug(item.name) === currentSlug);
+
+            if (p) {
+                // Isi Konten HTML
+                document.title = `${p.name} | Yass Store`;
+                document.getElementById('det-title').innerText = p.name;
+                document.getElementById('det-category').innerText = p.category;
+                document.getElementById('det-img').src = `/assets/${p.img}`;
+                document.getElementById('det-price').innerText = `Rp ${p.price.toLocaleString('id-ID')}`;
+                document.getElementById('det-stock').innerText = `Stok: ${p.stock}`;
+                document.getElementById('det-note').innerText = p.note;
+
+                // Cek Stok untuk Tombol
+                if (p.stock <= 0) {
+                    const btnBuy = document.getElementById('btn-order-now');
+                    btnBuy.innerText = "Stok Habis";
+                    btnBuy.style.background = "#444";
+                    btnBuy.disabled = true;
+                }
+
+                // Logika Tombol Pesan (Kembali ke home dengan ID)
+                document.getElementById('btn-order-now').onclick = () => {
+                    window.location.href = `/?checkout_id=${p.id}`;
+                };
+
+                // Logika Tombol Bagikan
+                document.getElementById('btn-share').onclick = async () => {
+                    const shareData = {
+                        title: p.name + " - Yass Store",
+                        text: `Beli ${p.name} harga Rp ${p.price.toLocaleString('id-ID')} hanya di Yass Store!`,
+                        url: window.location.href
+                    };
+                    try {
+                        if (navigator.share) {
+                            await navigator.share(shareData);
+                        } else {
+                            await navigator.clipboard.writeText(window.location.href);
+                            alert("Link produk berhasil disalin!");
+                        }
+                    } catch (err) {
+                        console.log("Error sharing:", err);
+                    }
+                };
+            } else {
+                // Jika produk tidak ditemukan, arahkan ke beranda
+                window.location.href = '/';
+            }
+        });
+    </script>
+</body>
+</html>

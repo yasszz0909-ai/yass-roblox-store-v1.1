@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Detail Produk | Yass Store</title>
+    <title>Detail Produk | Yass Roblox Store</title>
+    
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/product-detail.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -30,7 +31,7 @@
 
         <div class="detail-description">
             <h3>Deskripsi Produk</h3>
-            <p id="det-note">Memuat informasi produk...</p>
+            <p id="det-note">Memuat informasi...</p>
         </div>
     </main>
 
@@ -40,7 +41,7 @@
 
     <script src="/js/products.js"></script>
     <script>
-        // 1. Sinkronisasi Dark Mode dari LocalStorage
+        // Fungsi Dark Mode
         function applyTheme() {
             const savedTheme = localStorage.getItem('yass_theme');
             if (savedTheme === 'dark') {
@@ -48,7 +49,7 @@
             }
         }
 
-        // 2. Fungsi Membuat Slug (Harus sama dengan di script.js)
+        // Fungsi Slug (Sama dengan script.js)
         function createSlug(name) {
             return name.toLowerCase()
                 .replace(/[^a-z0-9 -]/g, '') 
@@ -57,18 +58,18 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            applyTheme(); // Terapkan tema gelap jika aktif
+            applyTheme();
 
-            // Ambil slug dari URL (contoh: /product/1000-robux-gamepass)
+            // Ambil slug dari URL (misal: /product/robux-1000)
             const pathParts = window.location.pathname.split('/');
             const currentSlug = pathParts[pathParts.length - 1];
 
-            // Cari data produk berdasarkan slug
+            // Cari produk berdasarkan slug
             const p = products.find(item => createSlug(item.name) === currentSlug);
 
             if (p) {
-                // Isi Konten HTML
-                document.title = `${p.name} | Yass Store`;
+                // Render Data
+                document.title = `${p.name} | Yass Roblox Store`;
                 document.getElementById('det-title').innerText = p.name;
                 document.getElementById('det-category').innerText = p.category;
                 document.getElementById('det-img').src = `/assets/${p.img}`;
@@ -76,39 +77,32 @@
                 document.getElementById('det-stock').innerText = `Stok: ${p.stock}`;
                 document.getElementById('det-note').innerText = p.note;
 
-                // Cek Stok untuk Tombol
+                // Handle Stok Habis
                 if (p.stock <= 0) {
-                    const btnBuy = document.getElementById('btn-order-now');
-                    btnBuy.innerText = "Stok Habis";
-                    btnBuy.style.background = "#444";
-                    btnBuy.disabled = true;
+                    const btn = document.getElementById('btn-order-now');
+                    btn.innerText = "Stok Habis";
+                    btn.style.background = "#555";
+                    btn.disabled = true;
                 }
 
-                // Logika Tombol Pesan (Kembali ke home dengan ID)
+                // Tombol Beli (Balik ke home + buka modal)
                 document.getElementById('btn-order-now').onclick = () => {
                     window.location.href = `/?checkout_id=${p.id}`;
                 };
 
-                // Logika Tombol Bagikan
+                // Tombol Share
                 document.getElementById('btn-share').onclick = async () => {
-                    const shareData = {
-                        title: p.name + " - Yass Store",
-                        text: `Beli ${p.name} harga Rp ${p.price.toLocaleString('id-ID')} hanya di Yass Store!`,
-                        url: window.location.href
-                    };
                     try {
-                        if (navigator.share) {
-                            await navigator.share(shareData);
-                        } else {
-                            await navigator.clipboard.writeText(window.location.href);
-                            alert("Link produk berhasil disalin!");
-                        }
-                    } catch (err) {
-                        console.log("Error sharing:", err);
+                        await navigator.share({
+                            title: p.name + " - Yass Store",
+                            url: window.location.href
+                        });
+                    } catch (e) {
+                        navigator.clipboard.writeText(window.location.href);
+                        alert("Link disalin!");
                     }
                 };
             } else {
-                // Jika produk tidak ditemukan, arahkan ke beranda
                 window.location.href = '/';
             }
         });

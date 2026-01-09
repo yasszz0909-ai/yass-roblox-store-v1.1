@@ -509,3 +509,30 @@ h1 {
 .btn-primary:active {
     transform: scale(0.96);
 }
+
+/* Gaya untuk Tombol Tutup (X) */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.1); /* Transparan agar elegan */
+    border: none;
+    color: var(--text-main); /* Mengikuti warna teks tema */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; /* Membuat tombol bulat sempurna */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 1001; /* Pastikan di atas elemen lain */
+}
+
+/* Efek saat tombol ditekan atau disentuh */
+.close-btn:active {
+    background: var(--accent-red); /* Berubah merah saat diklik */
+    color: white;
+    transform: scale(0.9);
+}

@@ -550,3 +550,59 @@ h1 {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.2);
 }
+
+/* --- 10. HERO SECTION (PEMISAH HEADER) --- */
+.hero-section {
+    padding: 40px 20px;
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-body) 100%);
+    text-align: left;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+}
+
+.brand-tagline {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.hero-logo {
+    width: 65px !important;
+    height: 65px !important;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* --- 11. MEMBERI JARAK PADA KATALOG --- */
+.container {
+    max-width: 600px;
+    margin: -10px auto 0; /* Memberi efek sedikit 'naik' agar terpisah */
+    padding: 0 20px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Tambahan: Pastikan Grid tetap rapi */
+.product-grid {
+    margin-top: 10px;
+}
+
+/* Khusus Dark Mode: Beri kilauan pada Hero */
+.dark-mode .hero-section {
+    background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    border-bottom: 1px solid var(--primary-glow);
+}

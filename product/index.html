@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Detail Produk | Yass Roblox Store</title>
-    
+    <title>Detail Produk | Yass Store</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/product-detail.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -31,7 +30,7 @@
 
         <div class="detail-description">
             <h3>Deskripsi Produk</h3>
-            <p id="det-note">Memuat informasi...</p>
+            <p id="det-note">Memuat informasi produk...</p>
         </div>
     </main>
 
@@ -41,15 +40,17 @@
 
     <script src="/js/products.js"></script>
     <script>
-        // Fungsi Dark Mode
+        // 1. Fungsi Sinkronisasi Tema
         function applyTheme() {
             const savedTheme = localStorage.getItem('yass_theme');
             if (savedTheme === 'dark') {
                 document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
             }
         }
 
-        // Fungsi Slug (Sama dengan script.js)
+        // 2. Fungsi Membuat Slug (Identik dengan script.js)
         function createSlug(name) {
             return name.toLowerCase()
                 .replace(/[^a-z0-9 -]/g, '') 
@@ -58,18 +59,19 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            applyTheme();
+            // Jalankan tema sebelum render konten
+            applyTheme(); 
 
-            // Ambil slug dari URL (misal: /product/robux-1000)
+            // Tangkap Slug dari URL
             const pathParts = window.location.pathname.split('/');
             const currentSlug = pathParts[pathParts.length - 1];
 
-            // Cari produk berdasarkan slug
+            // Cari produk yang cocok
             const p = products.find(item => createSlug(item.name) === currentSlug);
 
             if (p) {
-                // Render Data
-                document.title = `${p.name} | Yass Roblox Store`;
+                // Isi Data Produk
+                document.title = `${p.name} | Yass Store`;
                 document.getElementById('det-title').innerText = p.name;
                 document.getElementById('det-category').innerText = p.category;
                 document.getElementById('det-img').src = `/assets/${p.img}`;
@@ -77,32 +79,35 @@
                 document.getElementById('det-stock').innerText = `Stok: ${p.stock}`;
                 document.getElementById('det-note').innerText = p.note;
 
-                // Handle Stok Habis
+                // Proteksi Stok Habis
                 if (p.stock <= 0) {
                     const btn = document.getElementById('btn-order-now');
                     btn.innerText = "Stok Habis";
-                    btn.style.background = "#555";
+                    btn.style.opacity = "0.5";
                     btn.disabled = true;
                 }
 
-                // Tombol Beli (Balik ke home + buka modal)
+                // Aksi Tombol Order (Balik ke Home + Trigger Modal)
                 document.getElementById('btn-order-now').onclick = () => {
                     window.location.href = `/?checkout_id=${p.id}`;
                 };
 
-                // Tombol Share
+                // Aksi Tombol Bagikan
                 document.getElementById('btn-share').onclick = async () => {
                     try {
-                        await navigator.share({
-                            title: p.name + " - Yass Store",
-                            url: window.location.href
-                        });
-                    } catch (e) {
-                        navigator.clipboard.writeText(window.location.href);
-                        alert("Link disalin!");
-                    }
+                        if (navigator.share) {
+                            await navigator.share({
+                                title: p.name + " - Yass Store",
+                                url: window.location.href
+                            });
+                        } else {
+                            navigator.clipboard.writeText(window.location.href);
+                            alert("Link produk disalin ke clipboard!");
+                        }
+                    } catch (err) { console.log(err); }
                 };
             } else {
+                // Jika slug tidak valid, lempar ke beranda
                 window.location.href = '/';
             }
         });

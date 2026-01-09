@@ -510,25 +510,41 @@ h1 {
     transform: scale(0.96);
 }
 
-/* Gaya untuk Tombol Tutup (X) */
+/* Container Utama Modal harus Relative agar tombol X mengunci di dalamnya */
+.modal-content {
+    position: relative; /* KUNCI UTAMA */
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 24px 24px 0 0;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Tombol X yang mengunci di dalam kotak modal */
 .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(255, 255, 255, 0.1); /* Transparan agar elegan */
-    border: none;
-    color: var(--text-main); /* Mengikuti warna teks tema */
-    width: 35px;
-    height: 35px;
-    border-radius: 50%; /* Membuat tombol bulat sempurna */
+    position: absolute; /* Mengunci posisi berdasarkan .modal-content */
+    top: 15px;          /* Jarak dari atas kotak modal */
+    right: 15px;        /* Jarak dari kanan kotak modal */
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;       /* Warna putih agar kontras dengan header biru */
+    border-radius: 8px; /* Bentuk kotak membulat kecil */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
+    z-index: 10;
     transition: var(--transition);
-    z-index: 1001; /* Pastikan di atas elemen lain */
 }
+
+.close-btn:hover {
+    background: var(--accent-red);
+    border-color: var(--accent-red);
+}
+
 
 /* Efek saat tombol ditekan atau disentuh */
 .close-btn:active {

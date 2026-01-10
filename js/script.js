@@ -106,7 +106,7 @@ function filterCategory(category, element) {
     renderCatalog();
 }
 
-// --- FUNGSI MODAL ORDER (Update dengan Fitur Tax) ---
+// --- FUNGSI MODAL ORDER ---
 function openOrderModal(id) {
     selectedProduct = products.find(p => p.id === id);
     document.getElementById('modalImg').src = `/assets/${selectedProduct.img}`;
@@ -117,10 +117,8 @@ function openOrderModal(id) {
     const input = document.getElementById('usernameInput');
     const taxSection = document.getElementById('taxCalculatorSection');
 
-    // Reset Input
     input.value = "";
 
-    // Logika Input Berdasarkan Kategori
     if (selectedProduct.category === "Joki") {
         label.innerText = "Data Login (User & Pass)";
         input.placeholder = "Contoh: User: Yass | Pass: 123";
@@ -133,15 +131,14 @@ function openOrderModal(id) {
         label.innerText = "Username Roblox";
         input.placeholder = "Masukkan Username...";
         
-        // Cek jika kategori Robux untuk memunculkan Tax Helper
+        // Logika Tampil Tax Helper
         if (selectedProduct.category === "Robux" && taxSection) {
             taxSection.style.display = 'block';
-            // Ambil angka dari nama (Misal: "100 Robux" -> 100)
-            const amount = selectedProduct.name.replace(/[^0-9]/g, '');
+            const baseAmount = parseInt(selectedProduct.name.replace(/[^0-9]/g, ''));
             const taxInput = document.getElementById('taxInput');
             if(taxInput) {
-                taxInput.value = amount;
-                updateTaxCalculation(amount);
+                taxInput.value = baseAmount;
+                updateTaxCalculation(baseAmount);
             }
         } else {
             if(taxSection) taxSection.style.display = 'none';
@@ -150,8 +147,6 @@ function openOrderModal(id) {
 
     document.getElementById('modalOrder').style.display = 'flex';
     document.getElementById('qtyInput').value = 1;
-    
-    // Reset Pembayaran ke DANA
     document.getElementById('paymentMethod').value = "DANA";
     document.getElementById('selectedPaymentText').innerText = "DANA (Tanpa Biaya Admin)";
     
@@ -164,7 +159,21 @@ function closeOrderModal() {
 
 function calculateTotal(showNotif = true) {
     if (!selectedProduct) return;
-    const qty = document.getElementById('qtyInput').value;
+    
+    let qty = parseInt(document.getElementById('qtyInput').value) || 1;
+    if (qty < 1) { qty = 1; document.getElementById('qtyInput').value = 1; }
+
+    // --- FIX BUG: SINKRONISASI TAX OTOMATIS (USER TIDAK BISA EDIT) ---
+    if (selectedProduct.category === "Robux") {
+        const baseAmount = parseInt(selectedProduct.name.replace(/[^0-9]/g, ''));
+        const totalTarget = baseAmount * qty;
+        const taxInput = document.getElementById('taxInput');
+        if(taxInput) {
+            taxInput.value = totalTarget; // Update angka Target secara paksa
+            updateTaxCalculation(totalTarget); // Update angka Hasil Pasang
+        }
+    }
+
     const payment = document.getElementById('paymentMethod').value;
     
     if (showNotif) {
@@ -185,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTheme(); 
     renderCatalog();
 
-    // Menampilkan tanggal otomatis di header
     const taglineArea = document.querySelector('.brand-text');
     if (taglineArea) {
         const dateElement = document.createElement('p');

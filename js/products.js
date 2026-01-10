@@ -1,7 +1,7 @@
 // Daftar Produk Yass Store
 const products = [
     // --- KATEGORI: ROBUX ---
-    { id: 1, name: "1 Robux (Gamepass)", price: 170, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
+    { id: 1, name: "1 Robux (Gamepass)", price: 170, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 999 "+" },
     { id: 2, name: "100 Robux (Gamepass)", price: 16000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
     { id: 3, name: "500 Robux (Gamepass)", price: 71000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
     { id: 4, name: "1000 Robux (Gamepass)", price: 135000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
@@ -29,4 +29,5 @@ const products = [
     { id: 18, name: "Evolved Enchant Stone", price: 1000, img: "e-stone.png", note: "Trade In-Game", limited: true, category: "Item", stock: 0 }, // Stok Habis
     { id: 19, name: "Secret Tumbal", price: 2000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true, category: "Item", stock: 4 }
 ];
+
 

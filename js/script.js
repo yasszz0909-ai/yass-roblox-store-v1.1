@@ -28,7 +28,7 @@ function showToast(message) {
     }, 2500);
 }
 
-// --- LOGIKA BARU: CUSTOM PAYMENT SELECTOR (Sesuai Gambar) ---
+// --- LOGIKA: CUSTOM PAYMENT SELECTOR ---
 function openPaymentSelector() {
     const modal = document.getElementById('paymentSelectorModal');
     if (modal) {
@@ -38,35 +38,39 @@ function openPaymentSelector() {
 }
 
 function selectPayment(value, text) {
-    // Set value ke input tersembunyi
     document.getElementById('paymentMethod').value = value;
-    // Ubah teks di tampilan pemicu (trigger)
     document.getElementById('selectedPaymentText').innerText = text;
-    // Tutup dialog
     document.getElementById('paymentSelectorModal').style.display = 'none';
-    
-    // Jalankan kalkulasi total dengan toast
     calculateTotal(true);
 }
 
 function updateRadioUI() {
     const currentVal = document.getElementById('paymentMethod').value;
-    // Hapus kelas 'active' dari semua radio
     document.querySelectorAll('.radio-custom').forEach(rd => rd.classList.remove('radio-selected'));
-    // Tambah kelas ke yang terpilih
     const activeRadio = document.getElementById('radio-' + currentVal);
     if (activeRadio) activeRadio.classList.add('radio-selected');
 }
 
-// Tutup modal jika klik di luar area konten
 window.onclick = function(event) {
     const modal = document.getElementById('paymentSelectorModal');
     if (event.target == modal) {
         modal.style.display = 'none';
     }
 }
-// ------------------------------------------------------------
 
+// --- LOGIKA: TAX ROBUX CALCULATOR ---
+function updateTaxCalculation(val) {
+    const output = document.getElementById('taxOutputText');
+    if (val > 0) {
+        // Rumus: Target / 0.7 (Pajak Roblox 30%)
+        const result = Math.ceil(val / 0.7);
+        output.innerText = result + " Robux";
+    } else {
+        output.innerText = "0 Robux";
+    }
+}
+
+// --- FUNGSI UTAMA: RENDER KATALOG ---
 function renderCatalog() {
     const catalogContainer = document.getElementById('main-catalog');
     if (!catalogContainer) return;
@@ -102,6 +106,7 @@ function filterCategory(category, element) {
     renderCatalog();
 }
 
+// --- FUNGSI MODAL ORDER (Update dengan Fitur Tax) ---
 function openOrderModal(id) {
     selectedProduct = products.find(p => p.id === id);
     document.getElementById('modalImg').src = `/assets/${selectedProduct.img}`;
@@ -110,22 +115,43 @@ function openOrderModal(id) {
     
     const label = document.getElementById('inputLabelText');
     const input = document.getElementById('usernameInput');
+    const taxSection = document.getElementById('taxCalculatorSection');
 
+    // Reset Input
+    input.value = "";
+
+    // Logika Input Berdasarkan Kategori
     if (selectedProduct.category === "Joki") {
         label.innerText = "Data Login (User & Pass)";
         input.placeholder = "Contoh: User: Yass | Pass: 123";
+        if(taxSection) taxSection.style.display = 'none';
     } else if (selectedProduct.category === "Redfinger" || selectedProduct.category === "Akun") {
         label.innerText = "Nomor WA / Email Aktif";
         input.placeholder = "Untuk pengiriman data...";
+        if(taxSection) taxSection.style.display = 'none';
     } else {
         label.innerText = "Username Roblox";
         input.placeholder = "Masukkan Username...";
+        
+        // Cek jika kategori Robux untuk memunculkan Tax Helper
+        if (selectedProduct.category === "Robux" && taxSection) {
+            taxSection.style.display = 'block';
+            // Ambil angka dari nama (Misal: "100 Robux" -> 100)
+            const amount = selectedProduct.name.replace(/[^0-9]/g, '');
+            const taxInput = document.getElementById('taxInput');
+            if(taxInput) {
+                taxInput.value = amount;
+                updateTaxCalculation(amount);
+            }
+        } else {
+            if(taxSection) taxSection.style.display = 'none';
+        }
     }
 
     document.getElementById('modalOrder').style.display = 'flex';
     document.getElementById('qtyInput').value = 1;
     
-    // Reset ke DANA setiap buka modal
+    // Reset Pembayaran ke DANA
     document.getElementById('paymentMethod').value = "DANA";
     document.getElementById('selectedPaymentText').innerText = "DANA (Tanpa Biaya Admin)";
     
@@ -154,8 +180,7 @@ function calculateTotal(showNotif = true) {
     document.getElementById('totalPriceText').innerText = `Rp ${total.toLocaleString('id-ID')}`;
 }
 
-// --- UPDATE LOGIKA TANGGAL & ORDER (js/script.js) ---
-
+// --- INISIALISASI ---
 document.addEventListener('DOMContentLoaded', () => {
     applyTheme(); 
     renderCatalog();
@@ -173,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// --- FUNGSI KIRIM PESAN ---
 function sendToWA() {
     const user = document.getElementById('usernameInput').value;
     const qty = document.getElementById('qtyInput').value;
@@ -184,7 +210,6 @@ function sendToWA() {
         return;
     }
 
-    // Mendapatkan stempel waktu saat tombol diklik
     const skrg = new Date();
     const tgl = skrg.toLocaleDateString('id-ID');
     const jam = skrg.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
@@ -193,7 +218,6 @@ function sendToWA() {
     if (selectedProduct.category === "Joki") userType = "Data Login";
     else if (selectedProduct.category === "Redfinger" || selectedProduct.category === "Akun") userType = "Kontak";
 
-    // Format pesan WhatsApp yang rapi
     const message = `*PESANAN BARU - YASS STORE*%0A` +
                     `------------------------------%0A` +
                     `📦 Produk: *${selectedProduct.name}*%0A` +
@@ -208,9 +232,3 @@ function sendToWA() {
 
     window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
 }
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    applyTheme(); 
-    renderCatalog();
-});

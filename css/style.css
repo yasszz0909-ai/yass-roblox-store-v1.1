@@ -697,16 +697,6 @@ h1 {
     color: #777;
 }
 
-/* Mengatur label teks kecil di dalam Tax Helper */
-#taxCalculatorSection span {
-    display: block;
-    margin-bottom: 2px;
-}
-
-/* Penyesuaian teks output harga pasang */
-#taxOutputText {
-    text-shadow: 0 0 10px rgba(37, 211, 102, 0.2);
-}
 
 /* Container Utama Tax Helper */
 .tax-container {

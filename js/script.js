@@ -226,9 +226,19 @@ function sendToWA() {
     if (selectedProduct.category === "Joki") userType = "Data Login";
     else if (selectedProduct.category === "Redfinger" || selectedProduct.category === "Akun") userType = "Kontak";
 
+    // --- PERBAIKAN PESAN KHUSUS ROBUX ---
+    let taxInfo = "";
+    if (selectedProduct.category === "Robux") {
+        const pasangHarga = document.getElementById('taxOutputText').innerText;
+        const targetRobux = document.getElementById('taxInput').value;
+        taxInfo = `🎯 Target Robux: *${targetRobux} Robux*%0A` +
+                  `🏷️ Harga Pasang: *${pasangHarga}*%0A`;
+    }
+
     const message = `*PESANAN BARU - YASS STORE*%0A` +
                     `------------------------------%0A` +
                     `📦 Produk: *${selectedProduct.name}*%0A` +
+                    taxInfo + // Informasi Tax akan muncul di sini jika produk Robux
                     `👤 ${userType}: *${user}*%0A` +
                     `🔢 Jumlah: ${qty}%0A` +
                     `💳 Pembayaran: ${payment}%0A` +

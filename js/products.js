@@ -3,8 +3,8 @@ const products = [
     // --- KATEGORI: ROBUX ---
     { id: 1, name: "1 Robux (Gamepass)", price: 170, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
     { id: 2, name: "100 Robux (Gamepass)", price: 16000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
-    { id: 3, name: "500 Robux (Gamepass)", price: 78000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
-    { id: 4, name: "1000 Robux (Gamepass)", price: 150000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
+    { id: 3, name: "500 Robux (Gamepass)", price: 71000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
+    { id: 4, name: "1000 Robux (Gamepass)", price: 135000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
 
     // --- KATEGORI: REDFINGER ---
     { id: 5, name: "Redfinger VIP 7 Day", price: 22000, img: "rf.png", note: "Code Redeem Redfinger VIP 7 Hari", limited: false, category: "Redfinger", stock: 10 },
@@ -12,7 +12,7 @@ const products = [
 
     // --- KATEGORI: AKUN ---
     { id: 7, name: "Akun Roblox VC", price: 43000, img: "person.png", note: "Email bisa diganti, Voice Chat Aktif", limited: false, category: "Akun", stock: 5 },
-    { id: 8, name: "Akun Ghostfinn", price: 18000, img: "person.png", note: "Akun Polosan Rod Ghostfinn", limited: false, category: "Akun", stock: 3 },
+    { id: 8, name: "Akun Ghostfinn", price: 15000, img: "person.png", note: "Akun Polosan Rod Ghostfinn", limited: false, category: "Akun", stock: 3 },
 
     // --- KATEGORI: JOKI ---
     { id: 9, name: "Joki Ghostfinn Rod (Ares)", price: 19000, img: "time.png", note: "Minimal Ares Rod", limited: false, category: "Joki", stock: 99 },
@@ -26,6 +26,7 @@ const products = [
     { id: 15, name: "El Shark Gran Maja", price: 10000, img: "el-shark.png", note: "Trade In-Game", limited: true, category: "Item", stock: 2 },
     { id: 16, name: "Robot Kraken", price: 6000, img: "kraken.png", note: "Trade In-Game", limited: true, category: "Item", stock: 2 },
     { id: 17, name: "Enchant Stone x10", price: 1000, img: "stone.png", note: "Trade In-Game", limited: true, category: "Item", stock: 1000 },
-    { id: 18, name: "Evolved Enchant Stone", price: 1000, img: "s.png", note: "Trade In-Game", limited: true, category: "Item", stock: 0 }, // Stok Habis
+    { id: 18, name: "Evolved Enchant Stone", price: 1000, img: "e-stone.png", note: "Trade In-Game", limited: true, category: "Item", stock: 0 }, // Stok Habis
     { id: 19, name: "Secret Tumbal", price: 2000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true, category: "Item", stock: 4 }
 ];
+

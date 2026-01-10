@@ -708,3 +708,78 @@ h1 {
     text-shadow: 0 0 10px rgba(37, 211, 102, 0.2);
 }
 
+/* Container Utama Tax Helper */
+.tax-container {
+    display: none; /* Muncul hanya via JS */
+    background: rgba(0, 122, 255, 0.08);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px dashed var(--primary);
+}
+
+.tax-instruction {
+    font-size: 12px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.tax-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.tax-column {
+    flex: 1;
+}
+
+.tax-label {
+    font-size: 11px;
+    color: #666;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Input yang dikunci (Readonly) */
+.tax-field-locked {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    background-color: #f5f5f5;
+    color: #333;
+    cursor: not-allowed;
+    text-align: center;
+}
+
+.tax-divider {
+    width: 2px;
+    height: 35px;
+    background-color: #ddd;
+}
+
+.tax-result-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: #25d366; /* Warna Hijau Berhasil */
+}
+
+/* Dark Mode Support */
+.dark-mode .tax-container {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .tax-instruction {
+    color: #fff;
+}
+
+.dark-mode .tax-field-locked {
+    background-color: #222;
+    border-color: #444;
+    color: #fff;
+}

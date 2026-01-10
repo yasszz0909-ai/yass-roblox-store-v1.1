@@ -31,7 +31,7 @@
             <div class="brand-text">
                 <h1 class="brand-name">Yass Roblox Store</h1>
                 <p class="brand-tagline">Tersedia Kebutuhan Roblox, Fish It!, dll</p>
-                <p class="brand-tagline" style="color: var(--primary); font-weight: 700;">Aman & Terpercaya</p>
+                <p class="brand-tagline status-highlight">Aman & Terpercaya</p>
             </div>
             <img src="/assets/logo.png" alt="Logo Yass Store" class="hero-logo">
         </div>
@@ -67,19 +67,19 @@
                 </div>
             </div>
 
-            <div id="taxCalculatorSection" style="display:none; background: rgba(0,122,255,0.08); padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px dashed var(--primary);">
-                <div style="font-size: 11px; font-weight: bold; color: var(--primary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">🧮 Tax Helper (Roblox 30%)</div>
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="flex: 1;">
-                        <span style="font-size: 10px; color: #777; font-weight: 600;">Target Robux:</span>
-                        <input type="number" id="taxInput" oninput="updateTaxCalculation(this.value)" style="width: 100%; border: 1px solid #ddd; border-radius: 6px; padding: 6px; font-size: 13px; margin-top: 2px;">
+            <div id="taxCalculatorSection" class="tax-container">
+                <p class="tax-instruction">Harga yang harus kamu pasang di Gamepass kamu!</p>
+                <div class="tax-row">
+                    <div class="tax-column">
+                        <label class="tax-label">Target Robux</label>
+                        <input type="number" id="taxInput" readonly tabindex="-1" class="tax-field-locked">
                     </div>
-                    <div style="flex: 1; text-align: center; border-left: 1px solid #ddd; padding-left: 10px;">
-                        <span style="font-size: 10px; color: #777; font-weight: 600;">Harga Pasang:</span>
-                        <div id="taxOutputText" style="font-size: 16px; font-weight: 800; color: #25d366; margin-top: 4px;">0 Robux</div>
+                    <div class="tax-divider"></div>
+                    <div class="tax-column text-center">
+                        <label class="tax-label">Hasil</label>
+                        <div id="taxOutputText" class="tax-result-value">0 Robux</div>
                     </div>
                 </div>
-                <div style="font-size: 9px; color: #888; margin-top: 8px; line-height: 1.2;">*Pasang harga ini di Gamepass kamu agar Robux yang diterima sesuai target.</div>
             </div>
             <div class="input-group">
                 <label id="inputLabelText">Username Roblox</label>
@@ -103,7 +103,7 @@
             <div class="total-section">
                 <div class="total-row">
                     <span>Total Bayar:</span>
-                    <span id="totalPriceText" style="color: var(--primary); font-weight: 800;">Rp 0</span>
+                    <span id="totalPriceText" class="price-highlight">Rp 0</span>
                 </div>
             </div>
 

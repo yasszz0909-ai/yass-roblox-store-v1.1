@@ -67,6 +67,20 @@
                 </div>
             </div>
 
+            <div id="taxCalculatorSection" style="display:none; background: rgba(0,122,255,0.08); padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px dashed var(--primary);">
+                <div style="font-size: 11px; font-weight: bold; color: var(--primary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">🧮 Tax Helper (Roblox 30%)</div>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="flex: 1;">
+                        <span style="font-size: 10px; color: #777; font-weight: 600;">Target Robux:</span>
+                        <input type="number" id="taxInput" oninput="updateTaxCalculation(this.value)" style="width: 100%; border: 1px solid #ddd; border-radius: 6px; padding: 6px; font-size: 13px; margin-top: 2px;">
+                    </div>
+                    <div style="flex: 1; text-align: center; border-left: 1px solid #ddd; padding-left: 10px;">
+                        <span style="font-size: 10px; color: #777; font-weight: 600;">Harga Pasang:</span>
+                        <div id="taxOutputText" style="font-size: 16px; font-weight: 800; color: #25d366; margin-top: 4px;">0 Robux</div>
+                    </div>
+                </div>
+                <div style="font-size: 9px; color: #888; margin-top: 8px; line-height: 1.2;">*Pasang harga ini di Gamepass kamu agar Robux yang diterima sesuai target.</div>
+            </div>
             <div class="input-group">
                 <label id="inputLabelText">Username Roblox</label>
                 <input type="text" id="usernameInput" placeholder="Masukkan Username...">

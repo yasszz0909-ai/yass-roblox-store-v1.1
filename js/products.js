@@ -1,10 +1,10 @@
 // Daftar Produk Yass Store
 const products = [
     // --- KATEGORI: ROBUX ---
-    { id: 1, name: "1 Robux (Gamepass)", price: 170, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 999 "+" },
-    { id: 2, name: "100 Robux (Gamepass)", price: 16000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
-    { id: 3, name: "500 Robux (Gamepass)", price: 71000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
-    { id: 4, name: "1000 Robux (Gamepass)", price: 135000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 5000 },
+    { id: 1, name: "1 Robux (Gamepass)", price: 170, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 999 },
+    { id: 2, name: "100 Robux (Gamepass)", price: 16000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 999 },
+    { id: 3, name: "500 Robux (Gamepass)", price: 71000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 999 },
+    { id: 4, name: "1000 Robux (Gamepass)", price: 135000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 999 },
 
     // --- KATEGORI: REDFINGER ---
     { id: 5, name: "Redfinger VIP 7 Day", price: 22000, img: "rf.png", note: "Code Redeem Redfinger VIP 7 Hari", limited: false, category: "Redfinger", stock: 10 },
@@ -24,10 +24,11 @@ const products = [
 
     // --- KATEGORI: ITEM ---
     { id: 15, name: "El Shark Gran Maja", price: 10000, img: "el-shark.png", note: "Trade In-Game", limited: true, category: "Item", stock: 2 },
-    { id: 16, name: "Robot Kraken", price: 6000, img: "kraken.png", note: "Trade In-Game", limited: true, category: "Item", stock: 2 },
+    { id: 16, name: "Robot Kraken", price: 6000, img: "kraken.png", note: "Trade In-Game", limited: true, category: "Item", stock: 1 },
     { id: 17, name: "Enchant Stone x10", price: 1000, img: "stone.png", note: "Trade In-Game", limited: true, category: "Item", stock: 1000 },
     { id: 18, name: "Evolved Enchant Stone", price: 1000, img: "e-stone.png", note: "Trade In-Game", limited: true, category: "Item", stock: 0 }, // Stok Habis
-    { id: 19, name: "Secret Tumbal", price: 2000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true, category: "Item", stock: 4 }
+    { id: 19, name: "Secret Tumbal", price: 2000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true, category: "Item", stock: 2 }
 ];
+
 
 

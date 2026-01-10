@@ -231,8 +231,8 @@ function sendToWA() {
     if (selectedProduct.category === "Robux") {
         const pasangHarga = document.getElementById('taxOutputText').innerText;
         const targetRobux = document.getElementById('taxInput').value;
-        taxInfo = `🎯 Target Robux: *${targetRobux} Robux*%0A` +
-                  `🏷️ Harga Pasang: *${pasangHarga}*%0A`;
+        taxInfo = `🎯 Robux Target: *${targetRobux} Robux*%0A` +
+                  `🏷️ Set Harga Gamepass: *${pasangHarga}*%0A`;
     }
 
     const message = `*PESANAN BARU - YASS STORE*%0A` +

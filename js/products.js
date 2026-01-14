@@ -11,7 +11,7 @@ const products = [
     { id: 6, name: "Redfinger VIP 30 Day", price: 64000, img: "rf.png", note: "Code Redeem Redfinger VIP 30 Hari", limited: false, category: "Redfinger", stock: 10 },
 
     // --- KATEGORI: AKUN ---
-    { id: 7, name: "Akun Roblox VC", price: 43000, img: "person.png", note: "Email bisa diganti, Voice Chat Aktif", limited: false, category: "Akun", stock: 5 },
+    { id: 7, name: "Akun Roblox 18+ VC On", price: 43000, img: "person.png", note: "Email bisa diganti, Voice Chat Aktif", limited: false, category: "Akun", stock: 2 },
     { id: 8, name: "Akun Ghostfinn", price: 15000, img: "person.png", note: "Akun Polosan Rod Ghostfinn", limited: false, category: "Akun", stock: 3 },
 
     // --- KATEGORI: JOKI ---

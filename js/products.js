@@ -26,7 +26,7 @@ const products = [
     { id: 15, name: "El Shark Gran Maja", price: 10000, img: "el-shark.png", note: "Trade In-Game", limited: true, category: "Item", stock: 1 },
     { id: 16, name: "Robot Kraken", price: 6000, img: "kraken.png", note: "Trade In-Game", limited: true, category: "Item", stock: 0 },
     { id: 17, name: "Enchant Stone x10", price: 1000, img: "stone.png", note: "Trade In-Game", limited: true, category: "Item", stock: 1900 },
-    { id: 18, name: "Evolved Enchant Stone", price: 1000, img: "e-stone.png", note: "Trade In-Game", limited: true, category: "Item", stock: 0 }, // Stok Habis
+    { id: 18, name: "Evolved Enchant Stone", price: 1000, img: "e-stone.png", note: "Trade In-Game", limited: true, category: "Item", stock: 7 }, // Stok Habis
     { id: 19, name: "Secret Tumbal", price: 2000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true, category: "Item", stock: 0 }
 ];
 

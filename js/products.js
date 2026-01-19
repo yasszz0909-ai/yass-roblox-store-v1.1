@@ -23,10 +23,10 @@ const products = [
     { id: 14, name: "Joki AFK 24 Jam", price: 11000, img: "time.png", note: "Paket Hemat 24 Jam", limited: false, category: "Joki", stock: 99 },
     //Fish It
     { id: 15, name: "Pirate Megalodon", price: 20000, img: "mj.png", note: "Trade In-Game", limited: true, category: "Fish-it", stock: 1 },
-    { id: 16, name: "El Shark Gran Maja", price: 10000, img: "el-shark.png", note: "Trade In-Game", limited: true, category: "Fish-it", stock: 1 },
+    { id: 16, name: "El Shark Gran Maja", price: 10000, img: "el-shark.png", note: "Trade In-Game", limited: false, category: "Fish-it", stock: 1 },
     { id: 17, name: "Robot Kraken", price: 6000, img: "kraken.png", note: "Trade In-Game", limited: true, category: "Fish-it", stock: 0 },
-    { id: 18, name: "Enchant Stone x10", price: 1000, img: "stone.png", note: "Trade In-Game", limited: true, category: " Fish-it", stock: 1900 },
-    { id: 19, name: "Evolved Enchant Stone", price: 1000, img: "e-stone.png", note: "Trade In-Game", limited: true, category: "Fish-it", stock: 7 }, // Stok Habis
+    { id: 18, name: "Enchant Stone x10", price: 1000, img: "stone.png", note: "Trade In-Game", limited: false, category: " Fish-it", stock: 1900 },
+    { id: 19, name: "Evolved Enchant Stone", price: 1000, img: "e-stone.png", note: "Trade In-Game", limited: false, category: "Fish-it", stock: 7 }, // Stok Habis
     { id: 20, name: "Secret Tumbal", price: 2000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true, category: "Fish-it", stock: 6 }
 ];
 

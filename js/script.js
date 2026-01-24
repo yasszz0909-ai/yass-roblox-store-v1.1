@@ -89,7 +89,7 @@ function renderCatalog() {
             <div class="product-card" 
                  onclick="${isOutOfStock ? "showToast('Maaf, stok sedang habis!')" : `openOrderModal(${p.id})`}" 
                  style="${isOutOfStock ? 'opacity: 0.6; filter: grayscale(1);' : ''}">
-                ${p.limited ? '<span class="limited-badge">STOK TERBATAS</span>' : ''}
+                ${p.limited ? '<span class="limited-badge">Limited Item</span>' : ''}
                 <img src="/assets/${p.img}" alt="${p.name}">
                 <div style="font-size: 14px; font-weight: 600; margin-bottom: 2px;">${p.name}</div>
                 <div style="margin-bottom: 5px;">${stockStatus}</div>

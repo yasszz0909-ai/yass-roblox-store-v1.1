@@ -7,8 +7,8 @@ const products = [
     { id: 4, name: "1000 Robux (Gamepass)", price: 135000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 999 },
 
     // --- KATEGORI: REDFINGER ---
-    { id: 5, name: "Redfinger VIP 7 Day", price: 20000, img: "rf.png", note: "Code Redeem Redfinger VIP 7 Hari", limited: false, category: "Redfinger", stock: 10 },
-    { id: 6, name: "Redfinger VIP 30 Day", price: 55000, img: "rf.png", note: "Code Redeem Redfinger VIP 30 Hari", limited: false, category: "Redfinger", stock: 10 },
+    { id: 5, name: "Redfinger VIP 7 Day", price: 18000, img: "rf.png", note: "Code Redeem Redfinger VIP 7 Hari", limited: false, category: "Redfinger", stock: 10 },
+    { id: 6, name: "Redfinger VIP 30 Day", price: 50000, img: "rf.png", note: "Code Redeem Redfinger VIP 30 Hari", limited: false, category: "Redfinger", stock: 10 },
 
     // --- KATEGORI: AKUN ---
     { id: 7, name: "Akun Roblox 18+ VC On", price: 43000, img: "person.png", note: "Email bisa diganti, Voice Chat Aktif", limited: false, category: "Akun", stock: 2 },
@@ -28,6 +28,7 @@ const products = [
     { id: 19, name: "Evolved Enchant Stone", price: 1000, img: "e-stone.png", note: "Trade In-Game", limited: false, category: "Fish-it", stock: 0 }, // Stok Habis
     { id: 20, name: "Secret Tumbal", price: 2000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true, category: "Fish-it", stock: 0 }
 ];
+
 
 
 

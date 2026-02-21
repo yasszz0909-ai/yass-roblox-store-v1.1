@@ -20,14 +20,9 @@ const products = [
     { id: 11, name: "Joki Element Rod", price: 30000, img: "time.png", note: "Minimal Ghostfinn Rod", limited: false, category: "Joki", stock: 99 },
     { id: 12, name: "Joki Diamond Rod", price: 350000, img: "time.png", note: "Minimal Element Rod", limited: false, category: "Joki", stock: 99 },
     
-    //Fish It
-    { id: 15, name: "Leviathan", price: 12000, img: "levi.png", note: "Trade In-Game", limited: true, category: "Fish-it", stock: 1 },
-    { id: 16, name: "ElPirate Gran Maja", price: 8000, img: "emj.png", note: "Trade In-Game", limited: false, category: "Fish-it", stock: 1 },
-    { id: 17, name: "Ancient Magma Whale", price: 12000, img: "magma.png", note: "Trade In-Game", limited: true, category: "Fish-it", stock: 0 },
-    { id: 18, name: "Enchant Stone x10", price: 1000, img: "stone.png", note: "Trade In-Game", limited: false, category: " Fish-it", stock: 1900 },
-    { id: 19, name: "Evolved Enchant Stone", price: 1000, img: "e-stone.png", note: "Trade In-Game", limited: false, category: "Fish-it", stock: 0 }, // Stok Habis
-    { id: 20, name: "Secret Tumbal", price: 2000, img: "secret-tumbal.png", note: "Trade In-Game", limited: true, category: "Fish-it", stock: 0 }
+    //
 ];
+
 
 
 

@@ -7,7 +7,7 @@ const products = [
     { id: 4, name: "1000 Robux (Gamepass)", price: 135000, img: "robux.png", note: "Via Gamepass(After Tax) Pending 5-7 Hari", limited: false, category: "Robux", stock: 999 },
 
     // --- KATEGORI: REDFINGER ---
-    { id: 5, name: "Redfinger VIP 7 Day", price: 18000, img: "rf.png", note: "Code Redeem Redfinger VIP 7 Hari", limited: false, category: "Redfinger", stock: 10 },
+    { id: 5, name: "Redfinger VIP 7 Day", price: 15500, img: "rf.png", note: "Code Redeem Redfinger VIP 7 Hari", limited: false, category: "Redfinger", stock: 10 },
     { id: 6, name: "Redfinger VIP 30 Day", price: 50000, img: "rf.png", note: "Code Redeem Redfinger VIP 30 Hari", limited: false, category: "Redfinger", stock: 10 },
 
     // --- KATEGORI: AKUN ---
@@ -22,6 +22,7 @@ const products = [
     
     //
 ];
+
 
 
 

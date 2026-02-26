@@ -20,8 +20,10 @@ const products = [
     { id: 11, name: "Joki Element Rod", price: 30000, img: "time.png", note: "Minimal Ghostfinn Rod", limited: false, category: "Joki", stock: 99 },
     { id: 12, name: "Joki Diamond Rod", price: 350000, img: "time.png", note: "Minimal Element Rod", limited: false, category: "Joki", stock: 99 },
     
-    //
+    //lainnya
+    { id: 13, name: "Paket Diamond Rod", price: 50000, img: "paket.png", note: "Paketan Lochness Monster+Ruby Gemstone", limited: false, category: "Lainnya", stock: 99 }
 ];
+
 
 
 
